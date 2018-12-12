@@ -1,12 +1,18 @@
-'use strict';
-const {app, BrowserWindow} = require('electron');
+
+
+const electron = require('electron');
+const app = electron.app;
+const BrowserWindow = electron.BrowserWindow;
+const Menu = electron.Menu;
+// const {app, BrowserWindow} = require('electron');
 
 let win;
 
 function createWindow(){
     win = new BrowserWindow();
-    win.setFullScreen(true);
-    win.setMenu(null);
+    // win.setFullScreen(true);
+    win.maximize();
+    // win.setMenu(null);
     win.loadFile('index.html');
 
     win.on('closed', () => {

@@ -110,6 +110,12 @@ window.onload = () => {
 		}
 	});
 
+	
+	if(Key.isDown(Key.ECS)){
+		app.quit();
+	};
+	
+
 	gameLoop();
 }
 
@@ -327,6 +333,7 @@ let Key = {
 	DOWN: 83,
 	LEFT: 65,
 	ONE: 49,
+	ESC: 27,
 
 	isDown: function(keyCode){
 		return this._pressed[keyCode];
