@@ -94,6 +94,13 @@
 				this.used = true;
 			}
 
+			for(let wall of game.objects.walls){
+				if(this.c[0] + this.width > wall.c[0] && this.c[0] < wall.c[0] + wall.width &&
+				   this.c[1] + this.height > wall.c[1] && this.c[1] < wall.c[1] + wall.height){
+					this.used = true;
+				}
+			}
+
 			// console.log("X: " + this.c[0], "Y: " + this.c[1]);
 		},
 
