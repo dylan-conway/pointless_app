@@ -6,7 +6,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "package-win": "electron-packager . pointless --overwrite --asar --platform=win32 --arch=x64 --prune=true --out=../ --version-string.CompanyName=CE --version-string.ProductName=\"Pointless\""
+    "package-win": "electron-packager . pointless --overwrite --asar --platform=win32 --arch=x64 --prune=true --out=../packaged_apps --version-string.CompanyName=CE --version-string.ProductName=\"Pointless\""
   },
   "author": "Dylan Conway",
   "license": "ISC",
