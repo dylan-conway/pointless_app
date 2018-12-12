@@ -99,9 +99,7 @@
 		},
 
 		update: function(){
-			if(this.follows){
-				this.calcVelocity();
-			}
+			this.calcVelocity();
 
 			if(this.c[0] < 0 || this.c[0] + this.width > game.map.width){
 				this.vx = -this.vx;
@@ -130,22 +128,48 @@
 			}
 
 			this.drawX += this.vx;
-			this.drawY += this.vy;
 			this.c[0] += this.vx;
+
+			for(let wall of game.objects.walls){
+				if(this.c[0] + this.width > wall.c[0] && this.c[0] < wall.c[0] + wall.width &&
+				   this.c[1] + this.height > wall.c[1] && this.c[1] < wall.c[1] + wall.height){
+					if(this.vx > 0){
+						if(this.following){
+							this.drawX -= (this.c[0] + this.width) - wall.c[0];
+						}else{
+							this.vx = -this.vx;
+						}
+					}else if(this.vx < 0){
+						if(this.following){
+							this.drawX += (wall.c[0] + wall.width) - this.c[0];
+						}else{
+							this.vx = -this.vx;
+						}
+					}
+				}
+			}
+
+			this.drawY += this.vy;
 			this.c[1] += this.vy;
 
-			// for(let wall of game.objects.walls){
-			// 	if(this.c[0] + this.width > wall.c[0] && this.c[0] < wall.c[0] + wall.width &&
-			//        this.c[1] + this.height > wall.c[1] && this.c[1] < wall.c[1] + wall.height){
-			//        	if(this.following){
-			//        		this.drawX += (wall.c[0] + wall.width) - this.c[0];
-			//        	}else{
-			//        		this.vx = -this.vx;
-			//        		this.vy = -this.vy;
-			//        	}
-			// 	}
-			// }
-
+			for(let wall of game.objects.walls){
+				if(this.c[0] + this.width > wall.c[0] && this.c[0] < wall.c[0] + wall.width &&
+				   this.c[1] + this.height > wall.c[1] && this.c[1] < wall.c[1] + wall.height){
+					if(this.vy > 0){
+						if(this.following){
+							this.drawY -= (this.c[1] + this.height) - wall.c[1];
+						}else{
+							this.vy = -this.vy;
+						}
+					}else if(this.vy < 0){
+						if(this.following){
+							this.drawY += (wall.c[1] + wall.height) - this.c[1];
+						}else{
+							this.vy = -this.vy;
+						}
+					}
+				}
+			}
 		},
 
 		calcVelocity: function(){
@@ -153,9 +177,7 @@
 			   this.c[0] < game.player.c[0] + game.player.width + this.attractionRange &&
 			   this.c[1] + this.height > game.player.c[1] - this.attractionRange &&
 			   this.c[1] < game.player.c[1] + game.player.height + this.attractionRange){
-
-			   	this.following = true;
-
+				this.following = true;
 				let adjecent = Math.abs(game.player.c[0] - this.c[0]);
 				let opposite = Math.abs(game.player.c[1] - this.c[1]);
 				let angle = Math.atan(opposite / adjecent);
@@ -174,10 +196,13 @@
 					this.vx = Math.cos(angle) * -this.speed;
 					this.vy = Math.sin(angle) * this.speed;
 				}
+						
 			}else if(this.following){
-				this.vx = Math.random() * getRandomInt(-this.speed, this.speed);
-				this.vy = Math.random() * getRandomInt(-this.speed, this.speed);
-				this.following = false;
+				if(this.follows){
+					this.vx = Math.random() * getRandomInt(-this.speed, this.speed);
+					this.vy = Math.random() * getRandomInt(-this.speed, this.speed);
+					this.following = false;
+				}
 			}
 		},
 
