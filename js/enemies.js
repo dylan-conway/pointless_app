@@ -136,12 +136,14 @@
 					if(this.vx > 0){
 						if(this.following){
 							this.drawX -= (this.c[0] + this.width) - wall.c[0];
+							this.c[0] -= (this.c[0] + this.width) - wall.c[0];
 						}else{
 							this.vx = -this.vx;
 						}
 					}else if(this.vx < 0){
 						if(this.following){
 							this.drawX += (wall.c[0] + wall.width) - this.c[0];
+							this.c[0] += (wall.c[0] + wall.width) - this.c[0];
 						}else{
 							this.vx = -this.vx;
 						}
@@ -158,12 +160,14 @@
 					if(this.vy > 0){
 						if(this.following){
 							this.drawY -= (this.c[1] + this.height) - wall.c[1];
+							this.c[1] -= (this.c[1] + this.height) - wall.c[1];
 						}else{
 							this.vy = -this.vy;
 						}
 					}else if(this.vy < 0){
 						if(this.following){
 							this.drawY += (wall.c[1] + wall.height) - this.c[1];
+							this.c[1] += (wall.c[1] + wall.height) - this.c[1];
 						}else{
 							this.vy = -this.vy;
 						}
