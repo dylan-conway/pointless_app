@@ -34,7 +34,7 @@
 			this.drawX += this.vx;
 			this.drawY += this.vy;
 			this.c[0] += this.vx;
-			this.c[1] + this.vy;
+			this.c[1] += this.vy;
 		},
 
 		checkVisibility: function(){
@@ -61,8 +61,8 @@
 		this.color = color;
 		this.width = 6;
 		this.height = 6;
-		this.vx = getRandomNum(-.5, .5);
-		this.vy = getRandomNum(-.5, .5);
+		this.vx = getRandomNum(-1, .5);
+		this.vy = getRandomNum(-1, .5);
 		this.deleteCounter = getRandomInt(25, 100);
 		this.counter = 0;
 		this.visible = true;
@@ -80,10 +80,10 @@
 		update: function(){
 			this.width -= .1;
 			this.height -= .1;
-			this.drawX += .05;
-			this.drawY += .05;
-			this.c[0] += .05;
-			this.c[1] += .05;
+			this.drawX -= .05;
+			this.drawY -= .05;
+			this.c[0] -= .05;
+			this.c[1] -= .05;
 			if(this.width <= 0 || this.height <= 0){
 				this.delete(this);
 			}
