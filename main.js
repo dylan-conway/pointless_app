@@ -10,9 +10,9 @@ let win;
 
 function createWindow(){
     win = new BrowserWindow();
-    // win.setFullScreen(true);
-    win.maximize();
-    // win.setMenu(null);
+    win.setFullScreen(true);
+    // win.maximize();
+    win.setMenu(null);
     win.loadFile('index.html');
 
     win.on('closed', () => {
