@@ -2,6 +2,7 @@
 	function Objects(){
 		this.bullets = [];
 		this.enemies = [];
+		this.friends = [];
 		this.particles = [];
 		this.walls = [];
 	}
@@ -15,6 +16,10 @@
 			this.enemies.push(enemy);
 		},
 
+		addFriend: function(friend){
+			this.friends.push(friend);
+		},
+
 		addParticle: function(particle){
 			this.particles.push(particle);
 		},
@@ -26,6 +31,9 @@
 		draw: function(){
 			for(let wall of this.walls){
 				wall.draw();
+			}
+			for(let friend of this.friends){
+				friend.draw();
 			}
 			for(let enemy of this.enemies){
 				enemy.draw();
@@ -44,6 +52,9 @@
 			}
 			for(let enemy of this.enemies){
 				enemy.checkVisibility();
+			}
+			for(let friend of this.friends){
+				friend.checkVisibility();
 			}
 			for(let bullet of this.bullets){
 				bullet.checkVisibility();
@@ -86,6 +97,9 @@
 			for(let i = 0; i < this.enemies.length; i ++){
 				this.enemies[i].drawY -= speed;
 			}
+			for(let friend of this.friends){
+				friend.drawY -= speed;
+			}
 			for(let i = 0; i < this.particles.length; i ++){
 				this.particles[i].drawY -= speed;
 			}
@@ -100,6 +114,9 @@
 			}
 			for(let i = 0; i < this.enemies.length; i ++){
 				this.enemies[i].drawX += speed;
+			}
+			for(let friend of this.friends){
+				friend.drawX += speed;
 			}
 			for(let i = 0; i < this.particles.length; i ++){
 				this.particles[i].drawX += speed;
@@ -116,6 +133,9 @@
 			for(let i = 0; i < this.enemies.length; i ++){
 				this.enemies[i].drawY += speed;
 			}
+			for(let friend of this.friends){
+				friend.drawY += speed;
+			}
 			for(let i = 0; i < this.particles.length; i ++){
 				this.particles[i].drawY += speed;
 			}
@@ -130,6 +150,9 @@
 			}
 			for(let i = 0; i < this.enemies.length; i ++){
 				this.enemies[i].drawX -= speed;
+			}
+			for(let friend of this.friends){
+				friend.drawX -= speed;
 			}
 			for(let i = 0; i < this.particles.length; i ++){
 				this.particles[i].drawX -= speed;

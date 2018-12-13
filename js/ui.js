@@ -129,6 +129,40 @@
 				}
 			}
 
+			for(let friend of game.objects.friends){
+				if(!friend.dead){
+					let x = Math.floor((friend.c[0] / game.map.width) * this.width) + 1;
+					let y = Math.floor((friend.c[1] / game.map.height) * this.height) + 1;
+					let width;
+					let height;
+
+					if(friend.level === 1){
+						c.ctx.fillStyle = 'white';
+						width = 1;
+						height = 1;						
+					}
+					// else if(enemy.level === 2){
+					// 	c.ctx.fillStyle = 'white';
+					// 	width = 2;
+					// 	height = 2;
+					// }else if(enemy.level === 3){
+					// 	c.ctx.fillStyle = 'white';
+					// 	width = 2;
+					// 	height = 2;
+					// }else if(enemy.level === 4){
+					// 	c.ctx.fillStyle = 'green';
+					// 	width = 4;
+					// 	height = 4;
+					// }else if(enemy.level === 5){
+					// 	c.ctx.fillStyle = 'yellow';
+					// 	width = 8;
+					// 	height = 8;
+					// }
+					// c.ctx.fillStyle = 'black';
+					c.ctx.fillRect(this.drawX + x, this.drawY + y, width, height);	
+				}
+			}
+
 			let x = Math.floor((game.player.c[0] / game.map.width) * this.width) + 1;
 			let y = Math.floor((game.player.c[1] / game.map.height) * this.height) + 1;
 			c.ctx.fillStyle = 'red';

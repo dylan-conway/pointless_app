@@ -67,6 +67,13 @@
 			}
 		},
 
+		heal: function(healing){
+			this.health += healing;
+			if(this.health > this.maxHealth){
+				this.health = this.maxHealth;
+			}
+		},
+
 		moveUp: function(speed){
 			// this.drawY -= speed;
 			if(this.c[1] < 0){

@@ -188,6 +188,9 @@ Game.prototype = {
 		for(let i = 0; i < 3; i ++){
 			this.objects.addEnemy(new BadSlime(getRandomInt(1, game.map.width - 129), getRandomInt(1, game.map.height - 129), 5));
 		}
+		for(let i = 0; i < 10; i ++){
+			this.objects.addFriend(new GoodSlime(getRandomInt(1, game.map.width - 33), getRandomInt(1, game.map.height - 33), 1));
+		}
 
 		// this.objects.addWall(new Wall(1600, 0, 10, 2000, 'red'));
 	},
