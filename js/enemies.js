@@ -56,7 +56,7 @@
 				this.speed = 3;
 				this.width = 32;
 				this.height = 32;
-				this.maxHealth = 10;
+				this.maxHealth = 30;
 				this.health = this.maxHealth;
 				this.damage = 20;
 				this.attractionRange = 250;
