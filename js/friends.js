@@ -1,8 +1,7 @@
-
 (function(){
-	function BadSlime(mapX, mapY, level){
-		this.level = level;
+    function GoodSlime(mapX, mapY, level){
 		this.c = [mapX, mapY];
+		this.level = level;
 		this.drawX = game.player.drawX + (this.c[0] - game.player.c[0]);
 		this.drawY = game.player.drawY + (this.c[1] - game.player.c[1]);
 		this.dead = false;
@@ -18,7 +17,7 @@
 		this.height;
 		this.maxHealth;
 		this.health;
-		this.damage;
+		this.healing;
 		this.attractionRange;
 		this.follows;
 		this.src;
@@ -33,90 +32,18 @@
 		this.init();
 	}
 
-	BadSlime.prototype = {
+	GoodSlime.prototype = {
 		init: function(){
 			if(this.level === 1){
 				this.speed = 2;
-				this.width = 16;
-				this.height = 16;
-				this.maxHealth = 10;
+				this.width = 32;
+				this.height = 32;
+				this.maxHealth = 50;
 				this.health = this.maxHealth;
-				this.damage = 5;
-				this.attractionRange = 75;
+				this.healing = 30;
+				this.attractionRange = 200;
 				this.follows = false;
-				this.src = 'images/slug.png';
-				this.sx = getRandomInt(0, 3) * this.width;
-				this.sy = 0;
-				this.sWidth = this.width;
-				this.sHeight = this.height;
-				this.dWidth = this.width;
-				this.dHeight = this.height;
-				this.drawCounter = 0;
-				this.animationRate = 5;
-			}else if(this.level === 2){
-				this.speed = 3;
-				this.width = 32;
-				this.height = 32;
-				this.maxHealth = 30;
-				this.health = this.maxHealth;
-				this.damage = 20;
-				this.attractionRange = 250;
-				this.follows = true;
-				this.src = 'images/slugleveltwo.png';
-				this.sx = getRandomInt(0, 3) * this.width;
-				this.sy = 0;
-				this.sWidth = this.width;
-				this.sHeight = this.height;
-				this.dWidth = this.width;
-				this.dHeight = this.height;
-				this.drawCounter = 0;
-				this.animationRate = 5;
-			}else if(this.level === 3){
-				this.speed = 4;
-				this.width = 32;
-				this.height = 32;
-				this.maxHealth = 40;
-				this.health = this.maxHealth;
-				this.damage = 15;
-				this.attractionRange = 150;
-				this.follows = true;
-				this.src = 'images/sluglevelthree.png';
-				this.sx = getRandomInt(0, 3) * this.width;
-				this.sy = 0;
-				this.sWidth = this.width;
-				this.sHeight = this.height;
-				this.dWidth = this.width;
-				this.dHeight = this.height;
-				this.drawCounter = 0;
-				this.animationRate = 5;
-			}else if(this.level === 4){
-				this.speed = 1.2;
-				this.width = 64;
-				this.height = 64;
-				this.maxHealth = 150;
-				this.health = this.maxHealth;
-				this.damage = 40;
-				this.attractionRange = 600;
-				this.follows = true;
-				this.src = 'images/sluglevelfour.png';
-				this.sx = getRandomInt(0, 3) * this.width;
-				this.sy = 0;
-				this.sWidth = this.width;
-				this.sHeight = this.height;
-				this.dWidth = this.width;
-				this.dHeight = this.height;
-				this.drawCounter = 0;
-				this.animationRate = 5;
-			}else if(this.level === 5){
-				this.speed = 1;
-				this.width = 128;
-				this.height = 128;
-				this.maxHealth = 400;
-				this.health = this.maxHealth;
-				this.damage = 80;
-				this.attractionRange = 1000;
-				this.follows = true;
-				this.src = 'images/sluglevelfive.png';
+				this.src = 'images/goodslimelevelone.png';
 				this.sx = getRandomInt(0, 3) * this.width;
 				this.sy = 0;
 				this.sWidth = this.width;
@@ -138,16 +65,12 @@
 			}
 
 			if(this.visible){
-				this.sprite.onload = drawAnimationSprite(this.sprite, this.sx, this.sy, this.sWidth, this.sHeight, this.drawX, this.drawY, this.dWidth, this.dHeight);
-				// if(this.level === 1){
-				// 	this.sprite.src = 'images/slug.png';
-				// }else if(this.level === 2){
-				// 	this.sprite.src = 'images/slugleveltwo.png';
-				// }else if(this.level === 3){
-				// 	this.sprite.src = 'images/sluglevelthree.png';
-				// }
-				this.sprite.src = this.src;
+				this.sprite.onload = drawAnimationSprite(this.sprite, this.sx, this.sy,
+														 this.sWidth, this.sHeight,
+														 this.drawX, this.drawY,
+														 this.dWidth, this.dHeight);
 
+				this.sprite.src = this.src;
 				this.drawCounter ++;
 				if(this.drawCounter === this.animationRate){
 					this.drawCounter = 0;
@@ -157,43 +80,35 @@
 						this.sx += this.width;
 					}
 				}
-			}else{
-
 			}
 		},
 
 		update: function(){
 			this.calcVelocity();
 
+			// check map boundaries
 			if(this.c[0] < 0 || this.c[0] + this.width > game.map.width){
 				this.vx = -this.vx;
 			}
 			if(this.c[1] < 0 || this.c[1] + this.height > game.map.height){
 				this.vy = -this.vy;
 			}
-			// if(this.c[0] < game.player.c[0] + game.player.width &&
-			//    this.c[0] + this.width > game.player.c[0] &&
-			//    Math.abs(this.c[1] - game.player.c[1]) < 32){
-			// 	this.vx = -this.vx;
-			// }
-			// if(this.c[1] < game.player.c[1] + game.player.height &&
-			//    this.c[1] + this.height > game.player.c[1] &&
-			//    Math.abs(this.c[0] - game.player.c[0]) < 32){
-			// 	this.vy = - this.vy;
-			// }
 
+			// check collision with player
 			if(!this.dead){
 				if(this.c[0] < game.player.c[0] + game.player.width &&
-			       this.c[0] + this.width > game.player.c[0] &&
-			       this.c[1] < game.player.c[1] + game.player.height &&
-			       this.c[1] + this.height > game.player.c[1]){
-					this.explode();
+				   this.c[0] + this.width > game.player.c[0] &&
+				   this.c[1] < game.player.c[1] + game.player.height &&
+				   this.c[1] + this.height > game.player.c[1]){
+					this.healPlayer();
 				}
 			}
 
+			// move x-axis
 			this.drawX += this.vx;
 			this.c[0] += this.vx;
 
+			// check collision of x-cords with walls
 			for(let wall of game.objects.walls){
 				if(this.c[0] + this.width > wall.c[0] && this.c[0] < wall.c[0] + wall.width &&
 				   this.c[1] + this.height > wall.c[1] && this.c[1] < wall.c[1] + wall.height){
@@ -215,9 +130,11 @@
 				}
 			}
 
+			// move on y-axis
 			this.drawY += this.vy;
 			this.c[1] += this.vy;
 
+			// check collision for y-cords with walls
 			for(let wall of game.objects.walls){
 				if(this.c[0] + this.width > wall.c[0] && this.c[0] < wall.c[0] + wall.width &&
 				   this.c[1] + this.height > wall.c[1] && this.c[1] < wall.c[1] + wall.height){
@@ -242,10 +159,10 @@
 
 		calcVelocity: function(){
 			if(this.c[0] + this.width > game.player.c[0] - this.attractionRange &&
-			   this.c[0] < game.player.c[0] + game.player.width + this.attractionRange &&
-			   this.c[1] + this.height > game.player.c[1] - this.attractionRange &&
-			   this.c[1] < game.player.c[1] + game.player.height + this.attractionRange){
-		
+				this.c[0] < game.player.c[0] + game.player.width + this.attractionRange &&
+				this.c[1] + this.height > game.player.c[1] - this.attractionRange &&
+				this.c[1] < game.player.c[1] + game.player.height + this.attractionRange){
+		 
 				this.following = true;
 				let adjecent = Math.abs(game.player.c[0] - this.c[0]);
 				let opposite = Math.abs(game.player.c[1] - this.c[1]);
@@ -276,9 +193,9 @@
 
 		checkVisibility: function(){
 			if(this.c[0] + this.width > game.map.cc[0] &&
-			   this.c[0] < game.map.cc[0] + game.map.camWidth &&
-			   this.c[1] + this.height > game.map.cc[1] &&
-			   this.c[1] < game.map.cc[1] + game.map.camHeight){
+				this.c[0] < game.map.cc[0] + game.map.camWidth &&
+				this.c[1] + this.height > game.map.cc[1] &&
+				this.c[1] < game.map.cc[1] + game.map.camHeight){
 				this.visible = true;
 			}else{
 				this.visible = false;
@@ -289,31 +206,29 @@
 			this.health -= damage;
 			if(this.health <= 0){
 				this.dead = true;
-				game.killCount ++;
 				for(let i = 0; i < 5; i ++){
-			    	// game.objects.addParticle(new Particle(this.drawX + this.width / 2, this.drawY + this.height / 2,
-								// 			              this.c[0] + this.width / 2, this.c[1] + this.height / 2,
-								// 			              'red'));
 					game.objects.addParticle(new Particle(this.drawX + this.width / 2, this.drawY + this.height / 2,
-												          this.c[0] + this.width / 2, this.c[1] + this.height / 2,
-												          'orange'));
-			    }
+														  this.c[0] + this.width / 2, this.c[1] + this.height / 2,
+														  'purple'));
+					game.objects.addParticle(new Particle(this.drawX + this.width / 2, this.drawY + this.height / 2,
+					  									  this.c[0] + this.width / 2, this.c[1] + this.height / 2,
+														  'pink'));
+				}
 			}
 		},
 
-		explode: function(){
+		healPlayer: function(){
 			this.exploding = true;
 			this.dead = true;
-			game.killCount ++;
 			game.objects.addParticle(new Particle(this.drawX + this.width / 2, this.drawY + this.height / 2,
-									              this.c[0] + this.width / 2, this.c[1] + this.height / 2,
-									              'yellow'));
+												  this.c[0] + this.width / 2, this.c[1] + this.height / 2,
+				                                  'yellow'));
 			game.objects.addParticle(new Particle(this.drawX + this.width / 2, this.drawY + this.height / 2,
-										          this.c[0] + this.width / 2, this.c[1] + this.height / 2,
-										          'orange'));
-			game.player.takeDamage(this.damage);
-		}
-	}
-
-	window.BadSlime = BadSlime;
-})();
+			                                	  this.c[0] + this.width / 2, this.c[1] + this.height / 2,
+				                                  'orange'));
+            game.player.heal(this.healing);
+		},
+    }
+    
+    window.GoodSlime = GoodSlime;
+})
