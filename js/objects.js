@@ -85,16 +85,6 @@
 			for(let i = 0; i < this.enemies.length; i ++){
 				this.enemies[i].drawY -= speed;
 			}
-			// for(let enemy of this.enemies){
-			// 	for(let wall of this.walls){
-			// 		if(enemy.c[0] + enemy.width > wall.c[0] && enemy.c[0] < wall.c[0] + wall.width &&
-			// 	       enemy.c[1] + enemy.height > wall.c[1] && enemy.c[1] < wall.c[1] + wall.height){
-			// 			enemy.drawY += (wall.c[1] + wall.height) - enemy.c[1];
-			// 		}else{
-			// 			enemy.drawY -= speed;
-			// 		}
-			// 	}
-			// }
 			for(let i = 0; i < this.particles.length; i ++){
 				this.particles[i].drawY -= speed;
 			}
@@ -110,16 +100,6 @@
 			for(let i = 0; i < this.enemies.length; i ++){
 				this.enemies[i].drawX += speed;
 			}
-			// for(let enemy of this.enemies){
-			// 	for(let wall of this.walls){
-			// 		if(enemy.c[0] + enemy.width > wall.c[0] && enemy.c[0] < wall.c[0] + wall.width &&
-			// 	       enemy.c[1] + enemy.height > wall.c[1] && enemy.c[1] < wall.c[1] + wall.height){
-			// 			enemy.drawX -= (enemy.c[0] + enemy.width) - wall.c[0];
-			// 		}else{
-			// 			enemy.drawX += speed
-			// 		}
-			// 	}
-			// }
 			for(let i = 0; i < this.particles.length; i ++){
 				this.particles[i].drawX += speed;
 			}
@@ -135,16 +115,6 @@
 			for(let i = 0; i < this.enemies.length; i ++){
 				this.enemies[i].drawY += speed;
 			}
-			// for(let enemy of this.enemies){
-			// 	for(let wall of this.walls){
-			// 		if(enemy.c[0] + enemy.width > wall.c[0] && enemy.c[0] < wall.c[0] + wall.width &&
-			// 	       enemy.c[1] + enemy.height > wall.c[1] && enemy.c[1] < wall.c[1] + wall.height){
-			// 			enemy.drawY -= (enemy.c[1] + enemy.height) - wall.c[1];
-			// 		}else{
-			// 			enemy.drawY += speed;
-			// 		}
-			// 	}
-			// }
 			for(let i = 0; i < this.particles.length; i ++){
 				this.particles[i].drawY += speed;
 			}
@@ -160,16 +130,6 @@
 			for(let i = 0; i < this.enemies.length; i ++){
 				this.enemies[i].drawX -= speed;
 			}
-			// for(let enemy of this.enemies){
-			// 	for(let wall of this.walls){
-			// 		if(enemy.c[0] + enemy.width > wall.c[0] && enemy.c[0] < wall.c[0] + wall.width &&
-			// 	       enemy.c[1] + enemy.height > wall.c[1] && enemy.c[1] < wall.c[1] + wall.height){
-			// 			enemy.drawX += (wall.c[0] + wall.width) - enemy.c[0];
-			// 		}else{
-			// 			enemy.drawX -= speed;
-			// 		}
-			// 	}
-			// }
 			for(let i = 0; i < this.particles.length; i ++){
 				this.particles[i].drawX -= speed;
 			}
