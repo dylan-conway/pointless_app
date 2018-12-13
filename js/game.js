@@ -3,21 +3,6 @@ let c = {canvas: undefined, ctx: undefined};
 let mouse = {x: undefined, y: undefined, vx: undefined, vy: undefined};
 let game, cursor;
 
-const times = [];
-let fps = 0;
-
-function refreshLoop(){
-	window.requestAnimationFrame(() => {
-		const now = performance.now();
-		while(times.length > 0 && times[0] <= now - 1000){
-			times.shift();
-		}
-		times.push(now);
-		fps = times.length;
-		refreshLoop();
-	});
-}
-
 window.onload = () => {
 	c.canvas = document.getElementById('canvas');
 	c.ctx = c.canvas.getContext('2d');
@@ -110,11 +95,6 @@ window.onload = () => {
 		}
 	});
 
-	
-	if(Key.isDown(Key.ECS)){
-		app.quit();
-	};
-	
 
 	gameLoop();
 }
@@ -150,6 +130,7 @@ function Game(){
 
 Game.prototype = {
 	draw: function(){
+		
 		if(this.state === 'main'){
 			this.update();
 
