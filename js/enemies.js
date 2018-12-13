@@ -106,6 +106,24 @@
 				this.dHeight = this.height;
 				this.drawCounter = 0;
 				this.animationRate = 5;
+			}else if(this.level === 5){
+				this.speed = 1;
+				this.width = 128;
+				this.height = 128;
+				this.maxHealth = 400;
+				this.health = this.maxHealth;
+				this.damage = 80;
+				this.attractionRange = 1000;
+				this.follows = true;
+				this.src = 'images/sluglevelfive.png';
+				this.sx = getRandomInt(0, 3) * this.width;
+				this.sy = 0;
+				this.sWidth = this.width;
+				this.sHeight = this.height;
+				this.dWidth = this.width;
+				this.dHeight = this.height;
+				this.drawCounter = 0;
+				this.animationRate = 5;
 			}
 			this.vx = Math.random() * getRandomInt(-this.speed, this.speed);
 			this.vy = Math.random() * getRandomInt(-this.speed, this.speed);
