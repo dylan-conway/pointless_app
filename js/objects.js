@@ -60,7 +60,8 @@
 						if(bullet.c[0] + bullet.width > enemy.c[0] && bullet.c[0] < enemy.c[0] + enemy.width &&
 						   bullet.c[1] + bullet.height > enemy.c[1] && bullet.c[1] < enemy.c[1] + enemy.height){
 							enemy.takeDamage(bullet.damage);
-						    bullet.used = true;
+							bullet.used = true;
+							game.player.lastHitEnemy = enemy;
 						    let x = bullet.drawX;
 						    let y = bullet.drawY;
 						    let c0 = bullet.c[0];

@@ -1,3 +1,4 @@
+
 (function(){
 	function UI(){
 		// this.healthBar = new HealthBar();
@@ -6,6 +7,7 @@
 		this.scoreBar = new ScoreBar();
 		this.numberImage = new Image();
 		this.minimap = new Minimap();
+		this.enemyBar = new EnemyBar();
 	}
 
 	UI.prototype = {
@@ -31,6 +33,8 @@
 			this.minimap.draw();
 
 			this.gunBar.draw();
+
+			this.enemyBar.draw();
 		}
 	}
 
@@ -79,7 +83,8 @@
 
 	Minimap.prototype = {
 		draw: function(){
-			c.ctx.fillStyle = 'rgba(255, 255, 255, .5)';
+			// c.ctx.fillStyle = 'rgba(255, 255, 255, .5)';
+			c.ctx.fillStyle = 'black';
 			c.ctx.fillRect(this.drawX, this.drawY, this.width, this.height);
 			c.ctx.fillStyle = 'black';
 			c.ctx.fillRect(this.drawX - 2, this.drawY - 2, this.width + 4, 2);
@@ -95,9 +100,32 @@
 				if(!enemy.dead){
 					let x = Math.floor((enemy.c[0] / game.map.width) * this.width) + 1;
 					let y = Math.floor((enemy.c[1] / game.map.height) * this.height) + 1;
+					let width;
+					let height;
 
-					c.ctx.fillStyle = 'black';
-					c.ctx.fillRect(this.drawX + x, this.drawY + y, 2, 2);	
+					if(enemy.level === 1){
+						c.ctx.fillStyle = 'white';
+						width = 1;
+						height = 1;						
+					}else if(enemy.level === 2){
+						c.ctx.fillStyle = 'white';
+						width = 2;
+						height = 2;
+					}else if(enemy.level === 3){
+						c.ctx.fillStyle = 'white';
+						width = 2;
+						height = 2;
+					}else if(enemy.level === 4){
+						c.ctx.fillStyle = 'green';
+						width = 4;
+						height = 4;
+					}else if(enemy.level === 5){
+						c.ctx.fillStyle = 'yellow';
+						width = 8;
+						height = 8;
+					}
+					// c.ctx.fillStyle = 'black';
+					c.ctx.fillRect(this.drawX + x, this.drawY + y, width, height);	
 				}
 			}
 
@@ -134,9 +162,35 @@
 		}
 	}
 
+	function EnemyBar(){
+		this.drawX = Math.floor(innerWidth / 2) - 50;
+		this.drawY = 16;
+		this.width = 100;
+		this.height = 16;
+		this.enemy;
+	}
+
+	EnemyBar.prototype = {
+		draw: function(){
+			this.update();
+
+			c.ctx.fillStyle = 'black';
+			c.ctx.fillRect(this.drawX, this.drawY, this.width, this.height);
+			if(this.enemy){
+				c.ctx.fillStyle = 'white';
+				c.ctx.fillRect(this.drawX, this.drawY, (this.enemy.health / this.enemy.maxHealth) * this.width, this.height);
+			}
+		},
+
+		update: function(){
+			this.enemy = game.player.lastHitEnemy;
+		}
+	}
+
 	window.UI = UI;
 	window.ScoreBar = ScoreBar;
 	window.ScoreBarSlot = ScoreBarSlot;
 	window.Minimap = Minimap;
 	window.GunBar = GunBar;
+	window.EnemyBar = EnemyBar;
 })();

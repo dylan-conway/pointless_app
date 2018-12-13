@@ -15,6 +15,7 @@
 		this.canShoot = true;
 		this.shootRate = 7;
 		this.shootTimeCounter = this.shootRate;
+		this.lastHitEnemy;
 		this.maxHealth = 100;
 		this.health = this.maxHealth;
 		this.sprite = new Image();
