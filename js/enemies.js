@@ -226,7 +226,7 @@
 			if(this.health <= 0){
 				this.dead = true;
 				game.killCount ++;
-				for(let i = 0; i < 10; i ++){
+				for(let i = 0; i < 5; i ++){
 			    	// game.objects.addParticle(new Particle(this.drawX + this.width / 2, this.drawY + this.height / 2,
 								// 			              this.c[0] + this.width / 2, this.c[1] + this.height / 2,
 								// 			              'red'));
