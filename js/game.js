@@ -180,17 +180,17 @@ Game.prototype = {
 		this.player.c[1] = Math.floor((this.map.height / 2) - (this.player.height / 2));
 
 		this.objects = new Objects();
-		for(let i = 0; i < 500; i ++){
+		for(let i = 0; i < 30; i ++){
 			this.objects.addEnemy(new BadSlime(getRandomInt(1, game.map.width - 33), getRandomInt(1, game.map.height - 33), 1));
 		}
-		for(let i = 0; i < 5; i ++){
+		for(let i = 0; i < 10; i ++){
 			this.objects.addEnemy(new BadSlime(getRandomInt(1, game.map.width - 33), getRandomInt(1, game.map.height - 33), 2));
 		}
-		for(let i = 0; i < 20; i ++){
+		for(let i = 0; i < 10; i ++){
 			this.objects.addEnemy(new BadSlime(getRandomInt(1, game.map.width - 33), getRandomInt(1, game.map.height - 33), 3));
 		}
-		for(let i = 0; i < 5; i ++){
-			this.objects.addEnemy(new BadSlime(getRandomInt(1, game.map.width - 33), getRandomInt(1, game.map.height - 33), 4));
+		for(let i = 0; i < 10; i ++){
+			this.objects.addEnemy(new BadSlime(getRandomInt(1, game.map.width - 65), getRandomInt(1, game.map.height - 65), 4));
 		}
 
 		// this.objects.addWall(new Wall(1600, 0, 10, 2000, 'red'));

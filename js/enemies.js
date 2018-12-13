@@ -4,26 +4,31 @@
 		this.c = [mapX, mapY];
 		this.drawX = game.player.drawX + (this.c[0] - game.player.c[0]);
 		this.drawY = game.player.drawY + (this.c[1] - game.player.c[1]);
-		this.width = 32;
-		this.height = 32;
 		this.dead = false;
 		this.exploding = false;
 		this.visible = true;
 		this.sprite = new Image();
-		this.animationRate = 5;
-		this.drawCounter = 0;
-		this.sx = getRandomInt(0, 3) * 32;
 		this.following = false;
 
 		this.speed;
 		this.vx;
 		this.vy;
+		this.width;
+		this.height;
 		this.maxHealth;
 		this.health;
 		this.damage;
 		this.attractionRange;
 		this.follows;
 		this.src;
+		this.sx;
+		this.sy;
+		this.sWidth;
+		this.sHeight;
+		this.dWidth;
+		this.dHeight;
+		this.drawCounter;
+		this.animationRate;
 		this.init();
 	}
 
@@ -31,36 +36,76 @@
 		init: function(){
 			if(this.level === 1){
 				this.speed = 2;
-				this.src = 'images/slug.png';
+				this.width = 32;
+				this.height = 32;
 				this.maxHealth = 10;
 				this.health = this.maxHealth;
 				this.damage = 5;
 				this.attractionRange = 75;
 				this.follows = false;
+				this.src = 'images/slug.png';
+				this.sx = getRandomInt(0, 3) * 32;
+				this.sy = 0;
+				this.sWidth = 32;
+				this.sHeight = 32;
+				this.dWidth = 32;
+				this.dHeight = 32;
+				this.drawCounter = 0;
+				this.animationRate = 5;
 			}else if(this.level === 2){
 				this.speed = 3;
-				this.src = 'images/slugleveltwo.png';
+				this.width = 32;
+				this.height = 32;
 				this.maxHealth = 10;
 				this.health = this.maxHealth;
 				this.damage = 20;
 				this.attractionRange = 250;
 				this.follows = true;
+				this.src = 'images/slugleveltwo.png';
+				this.sx = getRandomInt(0, 3) * 32;
+				this.sy = 0;
+				this.sWidth = 32;
+				this.sHeight = 32;
+				this.dWidth = 32;
+				this.dHeight = 32;
+				this.drawCounter = 0;
+				this.animationRate = 5;
 			}else if(this.level === 3){
 				this.speed = 4;
-				this.src = 'images/sluglevelthree.png';
+				this.width = 32;
+				this.height = 32;
 				this.maxHealth = 40;
 				this.health = this.maxHealth;
 				this.damage = 15;
 				this.attractionRange = 150;
 				this.follows = true;
+				this.src = 'images/sluglevelthree.png';
+				this.sx = getRandomInt(0, 3) * 32;
+				this.sy = 0;
+				this.sWidth = 32;
+				this.sHeight = 32;
+				this.dWidth = 32;
+				this.dHeight = 32;
+				this.drawCounter = 0;
+				this.animationRate = 5;
 			}else if(this.level === 4){
 				this.speed = 1.2;
-				this.src = 'images/sluglevelfour.png';
+				this.width = 64;
+				this.height = 64;
 				this.maxHealth = 150;
 				this.health = this.maxHealth;
 				this.damage = 40;
 				this.attractionRange = 600;
 				this.follows = true;
+				this.src = 'images/sluglevelfour.png';
+				this.sx = getRandomInt(0, 3) * 64;
+				this.sy = 0;
+				this.sWidth = 64;
+				this.sHeight = 64;
+				this.dWidth = 64;
+				this.dHeight = 64;
+				this.drawCounter = 0;
+				this.animationRate = 5;
 			}
 			this.vx = Math.random() * getRandomInt(-this.speed, this.speed);
 			this.vy = Math.random() * getRandomInt(-this.speed, this.speed);
@@ -74,7 +119,7 @@
 			}
 
 			if(this.visible){
-				this.sprite.onload = drawAnimationSprite(this.sprite, this.sx, 0, 32, 32, this.drawX, this.drawY, 32, 32);
+				this.sprite.onload = drawAnimationSprite(this.sprite, this.sx, this.sy, this.sWidth, this.sHeight, this.drawX, this.drawY, this.dWidth, this.dHeight);
 				// if(this.level === 1){
 				// 	this.sprite.src = 'images/slug.png';
 				// }else if(this.level === 2){
@@ -87,7 +132,7 @@
 				this.drawCounter ++;
 				if(this.drawCounter === this.animationRate){
 					this.drawCounter = 0;
-					if(this.sx === 96){
+					if(this.sx === this.width * 3){
 						this.sx = 0;
 					}else{
 						this.sx += this.width;
