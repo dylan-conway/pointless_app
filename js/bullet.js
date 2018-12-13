@@ -38,8 +38,8 @@
 			if(this.visible){
 				this.particleCounter ++;
 				if(this.particleCounter === 5){
-					game.objects.addParticle(new BulletParticle(this.drawX, this.drawY, this.c[0], this.c[1], 'slateblue'));
-					game.objects.addParticle(new BulletParticle(this.drawX, this.drawY, this.c[0], this.c[1], 'slateblue'))
+					game.objects.addParticle(new BulletParticle(this.drawX, this.drawY, this.c[0], this.c[1], 'white'));
+					game.objects.addParticle(new BulletParticle(this.drawX, this.drawY, this.c[0], this.c[1], 'white'))
 					this.particleCounter = 0;
 				}
 
