@@ -231,4 +231,4 @@
     }
     
     window.GoodSlime = GoodSlime;
-})
+})();
