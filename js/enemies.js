@@ -35,7 +35,7 @@
 				this.maxHealth = 10;
 				this.health = this.maxHealth;
 				this.damage = 5;
-				this.attractionRange = 200;
+				this.attractionRange = 75;
 				this.follows = false;
 			}else if(this.level === 2){
 				this.speed = 3;
@@ -46,12 +46,12 @@
 				this.attractionRange = 250;
 				this.follows = true;
 			}else if(this.level === 3){
-				this.speed = 3.75;
+				this.speed = 4;
 				this.src = 'images/sluglevelthree.png';
 				this.maxHealth = 40;
 				this.health = this.maxHealth;
 				this.damage = 15;
-				this.attractionRange = 350;
+				this.attractionRange = 150;
 				this.follows = true;
 			}else if(this.level === 4){
 				this.speed = 1.2;
@@ -181,6 +181,7 @@
 			   this.c[0] < game.player.c[0] + game.player.width + this.attractionRange &&
 			   this.c[1] + this.height > game.player.c[1] - this.attractionRange &&
 			   this.c[1] < game.player.c[1] + game.player.height + this.attractionRange){
+		
 				this.following = true;
 				let adjecent = Math.abs(game.player.c[0] - this.c[0]);
 				let opposite = Math.abs(game.player.c[1] - this.c[1]);
@@ -199,8 +200,7 @@
 				}else if(this.c[0] > game.player.c[0] && this.c[1] < game.player.c[1]){
 					this.vx = Math.cos(angle) * -this.speed;
 					this.vy = Math.sin(angle) * this.speed;
-				}
-						
+				}		
 			}else if(this.following){
 				if(this.follows){
 					this.vx = Math.random() * getRandomInt(-this.speed, this.speed);

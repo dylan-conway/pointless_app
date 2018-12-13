@@ -15,7 +15,7 @@
 		this.canShoot = true;
 		this.shootRate = 7;
 		this.shootTimeCounter = this.shootRate;
-		this.maxHealth = 10000;
+		this.maxHealth = 100;
 		this.health = this.maxHealth;
 		this.sprite = new Image();
 		this.sx = 0;
