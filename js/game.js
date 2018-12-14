@@ -7,7 +7,6 @@ window.onload = () => {
 	c.canvas = document.getElementById('canvas');
 	c.ctx = c.canvas.getContext('2d');
 
-	// c.canvas.webkitRequestFullscreen();
 	c.canvas.width = innerWidth;
 	c.canvas.height = innerHeight;
 	// c.canvas.width = 1920;
