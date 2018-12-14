@@ -137,35 +137,17 @@
 					let height;
 
 					if(friend.level === 1){
-						c.ctx.fillStyle = 'white';
-						width = 1;
-						height = 1;						
+						c.ctx.fillStyle = 'red';
+						width = 2;
+						height = 2;						
 					}
-					// else if(enemy.level === 2){
-					// 	c.ctx.fillStyle = 'white';
-					// 	width = 2;
-					// 	height = 2;
-					// }else if(enemy.level === 3){
-					// 	c.ctx.fillStyle = 'white';
-					// 	width = 2;
-					// 	height = 2;
-					// }else if(enemy.level === 4){
-					// 	c.ctx.fillStyle = 'green';
-					// 	width = 4;
-					// 	height = 4;
-					// }else if(enemy.level === 5){
-					// 	c.ctx.fillStyle = 'yellow';
-					// 	width = 8;
-					// 	height = 8;
-					// }
-					// c.ctx.fillStyle = 'black';
 					c.ctx.fillRect(this.drawX + x, this.drawY + y, width, height);	
 				}
 			}
 
 			let x = Math.floor((game.player.c[0] / game.map.width) * this.width) + 1;
 			let y = Math.floor((game.player.c[1] / game.map.height) * this.height) + 1;
-			c.ctx.fillStyle = 'red';
+			c.ctx.fillStyle = 'rgba(201, 0, 209)';
 			c.ctx.fillRect(this.drawX + x - 2, this.drawY + y - 2, 4, 4);
 		},
 	}

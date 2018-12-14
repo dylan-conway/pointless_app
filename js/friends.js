@@ -35,7 +35,7 @@
 	GoodSlime.prototype = {
 		init: function(){
 			if(this.level === 1){
-				this.speed = 2;
+				this.speed = 5;
 				this.width = 32;
 				this.height = 32;
 				this.maxHealth = 50;
@@ -170,17 +170,17 @@
 				// console.log(adjecent, opposite, angle);
 
 				if(this.c[0] > game.player.c[0] && this.c[1] > game.player.c[1]){
-					this.vx = Math.cos(angle) * -this.speed;
-					this.vy = Math.sin(angle) * -this.speed;
+					this.vx = Math.cos(angle) * this.speed;
+					this.vy = Math.sin(angle) * this.speed;
 				}else if(this.c[0] < game.player.c[0] && this.c[1] > game.player.c[1]){
-					this.vx = Math.cos(angle) * this.speed;
-					this.vy = Math.sin(angle) * -this.speed;
-				}else if(this.c[0] < game.player.c[0] && this.c[1] < game.player.c[1]){
-					this.vx = Math.cos(angle) * this.speed;
-					this.vy = Math.sin(angle) * this.speed;
-				}else if(this.c[0] > game.player.c[0] && this.c[1] < game.player.c[1]){
 					this.vx = Math.cos(angle) * -this.speed;
 					this.vy = Math.sin(angle) * this.speed;
+				}else if(this.c[0] < game.player.c[0] && this.c[1] < game.player.c[1]){
+					this.vx = Math.cos(angle) * -this.speed;
+					this.vy = Math.sin(angle) * -this.speed;
+				}else if(this.c[0] > game.player.c[0] && this.c[1] < game.player.c[1]){
+					this.vx = Math.cos(angle) * this.speed;
+					this.vy = Math.sin(angle) * -this.speed;
 				}		
 			}else if(this.following){
 				if(this.follows){
