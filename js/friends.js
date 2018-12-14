@@ -8,6 +8,7 @@
 		this.exploding = false;
 		this.visible = true;
 		this.sprite = new Image();
+		this.icon = new Image();
 		this.following = false;
 
 		this.speed;
@@ -21,6 +22,7 @@
 		this.attractionRange;
 		this.follows;
 		this.src;
+		this.srcIcon;
 		this.sx;
 		this.sy;
 		this.sWidth;
@@ -44,6 +46,7 @@
 				this.attractionRange = 200;
 				this.follows = false;
 				this.src = 'images/goodslimelevelone.png';
+				this.srcIcon = 'images/goodslimeleveloneicon.png';
 				this.sx = getRandomInt(0, 3) * this.width;
 				this.sy = 0;
 				this.sWidth = this.width;
@@ -206,6 +209,7 @@
 			this.health -= damage;
 			if(this.health <= 0){
 				this.dead = true;
+				this.healPlayer();
 				for(let i = 0; i < 5; i ++){
 					game.objects.addParticle(new Particle(this.drawX + this.width / 2, this.drawY + this.height / 2,
 														  this.c[0] + this.width / 2, this.c[1] + this.height / 2,

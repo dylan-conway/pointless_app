@@ -179,10 +179,14 @@
 	}
 
 	function EnemyBar(){
-		this.drawX = Math.floor(innerWidth / 2) - 50;
+		this.drawX = Math.floor(innerWidth / 2) - 42;
 		this.drawY = 16;
 		this.width = 100;
 		this.height = 16;
+		this.iconWidth = 16;
+		this.sx = 0;
+		this.drawCounter = 0;
+		this.animationRate = 15;
 		this.enemy;
 	}
 
@@ -190,16 +194,38 @@
 		draw: function(){
 			this.update();
 
-			c.ctx.fillStyle = 'black';
-			c.ctx.fillRect(this.drawX, this.drawY, this.width, this.height);
+			
 			if(this.enemy){
-				c.ctx.fillStyle = 'white';
+				c.ctx.fillStyle = 'rgba(255, 255, 255, .5)';
+			    c.ctx.fillRect(this.drawX, this.drawY, this.width, this.height);
+				c.ctx.fillStyle = 'red';
 				c.ctx.fillRect(this.drawX, this.drawY, (this.enemy.health / this.enemy.maxHealth) * this.width, this.height);
+
+				c.ctx.fillStyle = 'black';
+				c.ctx.fillRect(this.drawX - 18, this.drawY, 16, 16)
+
+				this.enemy.icon.onload = drawAnimationSprite(this.enemy.icon, this.sx, 0, 16, 16, this.drawX - 18, this.drawY, 16, 16);
+				this.enemy.icon.src = this.enemy.srcIcon;
+				this.drawCounter ++;
+				if(this.drawCounter === this.animationRate){
+					this.drawCounter = 0;
+					if(this.sx === this.iconWidth * 3){
+						this.sx = 0;
+					}else{
+						this.sx += this.iconWidth;
+					}
+				}
+				c.ctx.fillStyle = 'black';
+				c.ctx.fillRect(this.drawX - 2, this.drawY, 2, this.height);
+				c.ctx.fillRect(this.drawX - 20, this.drawY - 2, this.width + 22, 2);
+				c.ctx.fillRect(this.drawX - 20, this.drawY, 2, this.height);
+				c.ctx.fillRect(this.drawX - 20, this.drawY + this.height, this.width + 22, 2);
+				c.ctx.fillRect(this.drawX + this.width, this.drawY, 2, this.height);
 			}
 		},
 
 		update: function(){
-			this.enemy = game.player.lastHitEnemy;
+			this.enemy = game.player.lastHit;
 		}
 	}
 

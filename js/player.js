@@ -15,7 +15,7 @@
 		this.canShoot = true;
 		this.shootRate = 7;
 		this.shootTimeCounter = this.shootRate;
-		this.lastHitEnemy;
+		this.lastHit;
 		this.maxHealth = 100;
 		this.health = this.maxHealth;
 		this.sprite = new Image();
@@ -50,6 +50,11 @@
 
 		update: function(){	
 			// console.log('x: ' + this.c[0], 'y: ' + this.c[1]);
+			if(this.lastHit){
+				if(this.lastHit.dead){
+					this.lastHit = null;
+				}
+			}
 		},
 
 		shoot: function(mx, my){

@@ -66,13 +66,14 @@
 
 		collisionDetection: function(){
 			for(let bullet of this.bullets){
+				// check enemy collsion
 				for(let enemy of this.enemies){
 					if(!bullet.used && !enemy.dead){
 						if(bullet.c[0] + bullet.width > enemy.c[0] && bullet.c[0] < enemy.c[0] + enemy.width &&
 						   bullet.c[1] + bullet.height > enemy.c[1] && bullet.c[1] < enemy.c[1] + enemy.height){
 							enemy.takeDamage(bullet.damage);
 							bullet.used = true;
-							game.player.lastHitEnemy = enemy;
+							game.player.lastHit = enemy;
 						    let x = bullet.drawX;
 						    let y = bullet.drawY;
 						    let c0 = bullet.c[0];
@@ -81,6 +82,24 @@
 						    	this.addParticle(new Particle(x, y, c0, c1, 'red'));
 						    	// this.addParticle(new Particle(x, y, c0, c1, 'orange'));
 						    }
+						}
+					}
+				}
+				// check friend collision
+				for(let friend of this.friends){
+					if(!bullet.used && !friend.dead){
+						if(bullet.c[0] + bullet.width > friend.c[0] && bullet.c[0] < friend.c[0] + friend.width &&
+						   bullet.c[1] + bullet.height > friend.c[1] && bullet.c[1] < friend.c[1] + friend.height){
+							friend.takeDamage(bullet.damage);
+							bullet.used = true;
+							game.player.lastHit = friend;
+							let x = bullet.drawX;
+							let y = bullet.drawY;
+							let c0 = bullet.c[0];
+							let c1 = bullet.c[1];
+							for(let i = 0; i < 5; i ++){
+								this.addParticle(new Particle(x, y, c0, c1, 'red'));
+							}
 						}
 					}
 				}

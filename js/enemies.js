@@ -9,6 +9,7 @@
 		this.exploding = false;
 		this.visible = true;
 		this.sprite = new Image();
+		this.icon = new Image();
 		this.following = false;
 
 		this.speed;
@@ -22,6 +23,7 @@
 		this.attractionRange;
 		this.follows;
 		this.src;
+		this.srcIcon;
 		this.sx;
 		this.sy;
 		this.sWidth;
@@ -44,7 +46,8 @@
 				this.damage = 5;
 				this.attractionRange = 75;
 				this.follows = false;
-				this.src = 'images/slug.png';
+				this.src = 'images/sluglevelone.png';
+				this.srcIcon = 'images/slugleveloneicon.png';
 				this.sx = getRandomInt(0, 3) * this.width;
 				this.sy = 0;
 				this.sWidth = this.width;
@@ -63,6 +66,7 @@
 				this.attractionRange = 250;
 				this.follows = true;
 				this.src = 'images/slugleveltwo.png';
+				this.srcIcon = 'images/slugleveltwoicon.png';
 				this.sx = getRandomInt(0, 3) * this.width;
 				this.sy = 0;
 				this.sWidth = this.width;
@@ -81,6 +85,7 @@
 				this.attractionRange = 150;
 				this.follows = true;
 				this.src = 'images/sluglevelthree.png';
+				this.srcIcon = 'images/sluglevelthreeicon.png';
 				this.sx = getRandomInt(0, 3) * this.width;
 				this.sy = 0;
 				this.sWidth = this.width;
@@ -99,6 +104,7 @@
 				this.attractionRange = 600;
 				this.follows = true;
 				this.src = 'images/sluglevelfour.png';
+				this.srcIcon = 'images/sluglevelfouricon.png';
 				this.sx = getRandomInt(0, 3) * this.width;
 				this.sy = 0;
 				this.sWidth = this.width;
@@ -117,6 +123,7 @@
 				this.attractionRange = 1000;
 				this.follows = true;
 				this.src = 'images/sluglevelfive.png';
+				this.srcIcon = 'images/sluglevelfiveicon.png';
 				this.sx = getRandomInt(0, 3) * this.width;
 				this.sy = 0;
 				this.sWidth = this.width;
@@ -157,8 +164,6 @@
 						this.sx += this.width;
 					}
 				}
-			}else{
-
 			}
 		},
 
