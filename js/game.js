@@ -8,7 +8,6 @@ window.onload = () => {
 	c.ctx = c.canvas.getContext('2d');
 
 	let dpr = window.devicePixelRatio || 1;
-	let ratio = dpr;
 	// let rect = c.canvas.getBoundingClientRect();
 
 	// c.canvas.style.width = window.innerWidth;
@@ -17,9 +16,9 @@ window.onload = () => {
 	let h = 1080;
 	window.innerWidth = w;
 	window.innerHeight = h;
-	console.log(w, h, ratio, dpr);
-	c.canvas.width = w * ratio / 2;
-	c.canvas.height = h * ratio / 2;
+	console.log(w, h, dpr);
+	c.canvas.width = w * dpr / 2;
+	c.canvas.height = h * dpr / 2;
 	c.canvas.style.width = w + 'px';
 	c.canvas.style.height = h + 'px';
 	
@@ -40,23 +39,23 @@ window.onload = () => {
 	window.addEventListener('mousemove', function(e){
 		if(game.state === 'mainmenu'){
 			if(mouse.x == undefined && mouse.y == undefined){
-				mouse.x = e.x;
-				mouse.y = e.y;
+				mouse.x = e.x * 1.25;
+				mouse.y = e.y * 1.25;
 			}else{
-				mouse.vx = e.x - mouse.x;
-				mouse.vy = e.y - mouse.y;
-				mouse.x = e.x;
-				mouse.y = e.y;
+				mouse.vx = e.x * 1.25 - mouse.x;
+				mouse.vy = e.y * 1.25 - mouse.y;
+				mouse.x = e.x * 1.25;
+				mouse.y = e.y * 1.25;
 			}
 		}else if(game.state === 'main'){
 			if(mouse.x == undefined && mouse.y == undefined){
-				mouse.x = e.x;
-				mouse.y = e.y;
+				mouse.x = e.x * 1.25;
+				mouse.y = e.y * 1.25;
 			}else{
-				mouse.vx = e.x - mouse.x;
-				mouse.vy = e.y - mouse.y;
-				mouse.x = e.x;
-				mouse.y = e.y;
+				mouse.vx = e.x * 1.25 - mouse.x;
+				mouse.vy = e.y * 1.25 - mouse.y;
+				mouse.x = e.x * 1.25;
+				mouse.y = e.y * 1.25;
 			}
 			game.player.checkDirection(mouse.x, mouse.y);
 			// if(mouse.vx > 0){
@@ -98,13 +97,13 @@ window.onload = () => {
 			// }
 		}else if(game.state === 'end'){
 			if(mouse.x == undefined && mouse.y == undefined){
-				mouse.x = e.x;
-				mouse.y = e.y;
+				mouse.x = e.x * 1.25;
+				mouse.y = e.y * 1.25;
 			}else{
-				mouse.vx = e.x - mouse.x;
-				mouse.vy = e.y - mouse.y;
-				mouse.x = e.x;
-				mouse.y = e.y;
+				mouse.vx = e.x * 1.25 - mouse.x;
+				mouse.vy = e.y * 1.25 - mouse.y;
+				mouse.x = e.x * 1.25;
+				mouse.y = e.y * 1.25;
 			}
 		}
 	});
