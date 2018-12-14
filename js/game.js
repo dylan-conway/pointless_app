@@ -7,8 +7,11 @@ window.onload = () => {
 	c.canvas = document.getElementById('canvas');
 	c.ctx = c.canvas.getContext('2d');
 
+	// c.canvas.webkitRequestFullscreen();
 	c.canvas.width = innerWidth;
 	c.canvas.height = innerHeight;
+	// c.canvas.width = 1920;
+	// c.canvas.height = 1080;
 
 	c.ctx.fillStyle = 'black';
 	c.ctx.fillRect(30, 30, 30, 30);
@@ -136,13 +139,13 @@ Game.prototype = {
 			this.objects.draw();
 			this.ui.draw();
 
-			if(Key.isDown(Key.ONE)){console.log(game.ui);};
+			if(Key.isDown(Key.ONE)){console.log(innerWidth, innerHeight);};
 		}else if(this.state === 'mainmenu'){
 			// c.ctx.font = 'bold 50px serif';
 			// c.ctx.fillText('press enter to start', 10, c.canvas.height / 3);
 
 			this.mainmenuImage.onload = drawSprite(this.mainmenuImage, 0, 0);
-			this.mainmenuImage.src = 'images/mainmenuimage.png'
+			this.mainmenuImage.src = 'images/mainmenuimage2.png'
 
 			if(Key.isDown(Key.ENTER)){this.startGame();};
 		}else if(this.state === 'end'){
@@ -206,17 +209,17 @@ Game.prototype = {
 
 	update: function(){
 		if(Key.isDown(Key.UP)){
-				this.moveUp(this.player.speed);
-			}
-			if(Key.isDown(Key.RIGHT)){
-				this.moveRight(this.player.speed);
-			}
-			if(Key.isDown(Key.DOWN)){
-				this.moveDown(this.player.speed);
-			}
-			if(Key.isDown(Key.LEFT)){
-				this.moveLeft(this.player.speed);
-			}
+			this.moveUp(this.player.speed);
+		}
+		if(Key.isDown(Key.RIGHT)){
+			this.moveRight(this.player.speed);
+		}
+		if(Key.isDown(Key.DOWN)){
+			this.moveDown(this.player.speed);
+		}
+		if(Key.isDown(Key.LEFT)){
+			this.moveLeft(this.player.speed);
+		}
 	},
 
 	moveUp: function(speed){
