@@ -7,10 +7,27 @@ window.onload = () => {
 	c.canvas = document.getElementById('canvas');
 	c.ctx = c.canvas.getContext('2d');
 
-	c.canvas.width = innerWidth;
-	c.canvas.height = innerHeight;
-	// c.canvas.width = 1920;
-	// c.canvas.height = 1080;
+	let dpr = window.devicePixelRatio || 1;
+	let ratio = dpr;
+	// let rect = c.canvas.getBoundingClientRect();
+
+	// c.canvas.style.width = window.innerWidth;
+	// c.canvas.style.height = window.innerHeight;
+	let w = 1920;
+	let h = 1080;
+	window.innerWidth = w;
+	window.innerHeight = h;
+	console.log(w, h, ratio, dpr);
+	c.canvas.width = w * ratio / 2;
+	c.canvas.height = h * ratio / 2;
+	c.canvas.style.width = w + 'px';
+	c.canvas.style.height = h + 'px';
+	
+	// c.ctx.scale(dpr, dpr);
+
+	
+	// c.canvas.width = innerWidth;
+	// c.canvas.height = innerHeight;
 
 	c.ctx.fillStyle = 'black';
 	c.ctx.fillRect(30, 30, 30, 30);
@@ -179,22 +196,22 @@ Game.prototype = {
 		this.player.c[1] = Math.floor((this.map.height / 2) - (this.player.height / 2));
 
 		this.objects = new Objects();
-		for(let i = 0; i < 25; i ++){
-			this.objects.addEnemy(new BadSlime(getRandomInt(1, game.map.width - 17), getRandomInt(1, 400), 1));
-			this.objects.addEnemy(new BadSlime(getRandomInt(1, game.map.width - 17), getRandomInt(game.map.height - 400, game.map.height - 17), 1));
-		}
-		for(let i = 0; i < 25; i ++){
-			this.objects.addEnemy(new BadSlime(getRandomInt(1, game.map.width - 33), getRandomInt(1, game.map.height - 33), 2));
-		}
-		for(let i = 0; i < 10; i ++){
-			this.objects.addEnemy(new BadSlime(getRandomInt(1, game.map.width - 33), getRandomInt(1, game.map.height - 33), 3));
-		}
-		for(let i = 0; i < 10; i ++){
-			this.objects.addEnemy(new BadSlime(getRandomInt(1, game.map.width - 65), getRandomInt(1, game.map.height - 65), 4));
-		}
-		for(let i = 0; i < 3; i ++){
-			this.objects.addEnemy(new BadSlime(getRandomInt(1, game.map.width - 129), getRandomInt(1, game.map.height - 129), 5));
-		}
+		// for(let i = 0; i < 25; i ++){
+		// 	this.objects.addEnemy(new BadSlime(getRandomInt(1, game.map.width - 17), getRandomInt(1, 400), 1));
+		// 	this.objects.addEnemy(new BadSlime(getRandomInt(1, game.map.width - 17), getRandomInt(game.map.height - 400, game.map.height - 17), 1));
+		// }
+		// for(let i = 0; i < 25; i ++){
+		// 	this.objects.addEnemy(new BadSlime(getRandomInt(1, game.map.width - 33), getRandomInt(1, game.map.height - 33), 2));
+		// }
+		// for(let i = 0; i < 10; i ++){
+		// 	this.objects.addEnemy(new BadSlime(getRandomInt(1, game.map.width - 33), getRandomInt(1, game.map.height - 33), 3));
+		// }
+		// for(let i = 0; i < 10; i ++){
+		// 	this.objects.addEnemy(new BadSlime(getRandomInt(1, game.map.width - 65), getRandomInt(1, game.map.height - 65), 4));
+		// }
+		// for(let i = 0; i < 3; i ++){
+		// 	this.objects.addEnemy(new BadSlime(getRandomInt(1, game.map.width - 129), getRandomInt(1, game.map.height - 129), 5));
+		// }
 		for(let i = 0; i < 10; i ++){
 			this.objects.addFriend(new GoodSlime(getRandomInt(1, game.map.width - 33), getRandomInt(1, game.map.height - 33), 1));
 		}
