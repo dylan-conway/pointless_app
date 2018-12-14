@@ -109,6 +109,7 @@ function gameLoop(){
 
 function Game(){
 	this.mainmenu;
+	this.mainmenuImage = new Image();
 
 	this.map;
 	this.player;
@@ -117,6 +118,7 @@ function Game(){
 	this.killCount = 0;
 
 	this.endmenu
+	this.endmenuImage = new Image();
 	this.state = 'mainmenu';
 }
 
@@ -136,8 +138,11 @@ Game.prototype = {
 
 			if(Key.isDown(Key.ONE)){console.log(game.ui);};
 		}else if(this.state === 'mainmenu'){
-			c.ctx.font = 'bold 50px serif';
-			c.ctx.fillText('press enter to start', 10, c.canvas.height / 3);
+			// c.ctx.font = 'bold 50px serif';
+			// c.ctx.fillText('press enter to start', 10, c.canvas.height / 3);
+
+			this.mainmenuImage.onload = drawSprite(this.mainmenuImage, 0, 0);
+			this.mainmenuImage.src = 'images/mainmenuimage.png'
 
 			if(Key.isDown(Key.ENTER)){this.startGame();};
 		}else if(this.state === 'end'){
