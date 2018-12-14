@@ -110,6 +110,10 @@ window.onload = () => {
 	window.addEventListener('click', function(){
 		if(game.state === 'main'){
 			game.player.shoot(mouse.x, mouse.y);
+		}else if(game.state === 'mainmenu'){
+			if(mouse.x > 269 && mouse.x < 1446 && mouse.y > 214 && mouse.y < 448){
+				game.startGame();
+			}
 		}
 	});
 
@@ -161,8 +165,6 @@ Game.prototype = {
 
 			this.mainmenuImage.onload = drawSprite(this.mainmenuImage, 0, 0);
 			this.mainmenuImage.src = 'images/mainmenuimage2.png'
-
-			if(Key.isDown(Key.ENTER)){this.startGame();};
 		}else if(this.state === 'end'){
 			c.ctx.fillStyle = 'red';
 			c.ctx.fillRect(0, 0, innerWidth, innerHeight);
