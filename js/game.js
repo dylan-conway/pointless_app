@@ -16,7 +16,7 @@ window.onload = () => {
 	let h = 1080;
 	window.innerWidth = w;
 	window.innerHeight = h;
-	console.log(w, h, dpr);
+	// console.log(w, h, innerWidth, innerHeight, dpr);
 	c.canvas.width = w * dpr / 2;
 	c.canvas.height = h * dpr / 2;
 	c.canvas.style.width = w + 'px';
@@ -195,7 +195,7 @@ Game.prototype = {
 		this.player.c[1] = Math.floor((this.map.height / 2) - (this.player.height / 2));
 
 		this.objects = new Objects();
-		for(let i = 0; i < 25; i ++){
+		for(let i = 0; i < 200; i ++){
 			this.objects.addEnemy(new BadSlime(getRandomInt(1, game.map.width - 17), getRandomInt(1, 400), 1));
 			this.objects.addEnemy(new BadSlime(getRandomInt(1, game.map.width - 17), getRandomInt(game.map.height - 400, game.map.height - 17), 1));
 		}

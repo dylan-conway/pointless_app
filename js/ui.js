@@ -97,7 +97,7 @@
 
 		drawMapMarkers: function(){
 			for(let enemy of game.objects.enemies){
-				if(!enemy.dead){
+				if(!enemy.dead && enemy.visible){
 					let x = Math.floor((enemy.c[0] / game.map.width) * this.width) + 1;
 					let y = Math.floor((enemy.c[1] / game.map.height) * this.height) + 1;
 					let width;
@@ -130,7 +130,7 @@
 			}
 
 			for(let friend of game.objects.friends){
-				if(!friend.dead){
+				if(!friend.dead && friend.visible){
 					let x = Math.floor((friend.c[0] / game.map.width) * this.width) + 1;
 					let y = Math.floor((friend.c[1] / game.map.height) * this.height) + 1;
 					let width;
@@ -147,6 +147,15 @@
 
 			let x = Math.floor((game.player.c[0] / game.map.width) * this.width) + 1;
 			let y = Math.floor((game.player.c[1] / game.map.height) * this.height) + 1;
+			let borderX = x - this.width / 4;
+			let borderY = y - this.height / 4;
+			let borderWidth = this.width / 2;
+			let borderHeight = this.height / 2;
+			c.ctx.fillStyle = 'white';
+			c.ctx.fillRect(this.drawX + borderX, this.drawY + borderY - 5, borderWidth, 1);
+			c.ctx.fillRect(this.drawX + borderX - 5, this.drawY + borderY, 1, borderHeight);
+			c.ctx.fillRect(this.drawX + borderX + borderWidth + 5, this.drawY + borderY, 1, borderHeight + 1);
+			c.ctx.fillRect(this.drawX + borderX, this.drawY + borderY + borderHeight + 5, borderWidth, 1);
 			c.ctx.fillStyle = 'rgba(201, 0, 209)';
 			c.ctx.fillRect(this.drawX + x - 2, this.drawY + y - 2, 4, 4);
 		},
