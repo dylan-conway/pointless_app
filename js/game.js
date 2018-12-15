@@ -241,12 +241,6 @@ Game.prototype = {
 
 	moveUp: function(speed){
 		this.player.c[1] -= speed;
-		// if(this.player.c[1] > this.map.height - (innerHeight / 2) || this.player.c[1] < (innerHeight / 2) - 40){
-		// 	this.player.moveUp(speed);
-		// }else{
-		// 	this.map.moveUp(-speed);
-		// 	this.objects.moveUp(-speed);	
-		// }
 
 		this.player.moveUp(speed);
 		this.map.moveUp(-speed);
@@ -255,12 +249,6 @@ Game.prototype = {
 
 	moveRight: function(speed){
 		this.player.c[0] += speed;
-		// if(this.player.c[0] > this.map.width - (innerWidth / 2) || this.player.c[0] < (innerWidth / 2) - 40){
-		// 	this.player.moveRight(speed);
-		// }else{
-		// 	this.map.moveRight(-speed);
-		// 	this.objects.moveRight(-speed);
-		// }
 
 		this.player.moveRight(speed);
 		this.map.moveRight(-speed);
@@ -269,12 +257,6 @@ Game.prototype = {
 
 	moveDown: function(speed){
 		this.player.c[1] += speed;
-		// if(this.player.c[1] > this.map.height - (innerHeight / 2) || this.player.c[1] < (innerHeight / 2) - 40){
-		// 	this.player.moveDown(speed);
-		// }else{
-		// 	this.map.moveDown(-speed);
-		// 	this.objects.moveDown(-speed);			
-		// }
 
 		this.player.moveDown(speed);
 		this.map.moveDown(-speed);
@@ -283,12 +265,6 @@ Game.prototype = {
 
 	moveLeft: function(speed){
 		this.player.c[0] -= speed;
-		// if(this.player.c[0] > this.map.width - (innerWidth / 2) || this.player.c[0] < (innerWidth / 2) - 40){
-		// 	this.player.moveLeft(speed);
-		// }else{
-		// 	this.map.moveLeft(-speed);
-		// 	this.objects.moveLeft(-speed);
-		// }
 		
 		this.player.moveLeft(speed);
 		this.map.moveLeft(-speed);
