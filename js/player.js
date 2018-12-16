@@ -18,6 +18,7 @@
 		this.lastHit;
 		this.maxHealth = 100;
 		this.health = this.maxHealth;
+		this.dead = false;
 		this.sprite = new Image();
 		this.sx = 0;
 		this.animationRate = 5;
@@ -68,7 +69,7 @@
 		takeDamage: function(damage){
 			this.health -= damage;
 			if(this.health <= 0){
-				game.endGame();
+				this.dead = true;
 			}
 		},
 

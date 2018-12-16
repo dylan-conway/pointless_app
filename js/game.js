@@ -125,6 +125,10 @@ Game.prototype = {
 			this.objects.draw();
 			this.ui.draw();
 
+			if(this.player.dead){
+				this.endGame();
+			}
+
 			if(Key.isDown(Key.ONE)){console.log(innerWidth, innerHeight);};
 		}else if(this.state === 'mainmenu'){
 			// c.ctx.font = 'bold 50px serif';
