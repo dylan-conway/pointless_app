@@ -210,6 +210,19 @@
 				}
 			}
 
+			for(let i = 0; i < game.objects.friends.length; i ++){
+				if(!game.objects.friends[i].dead){
+					let x = Math.abs((this.c[0] + this.width / 2) - game.objects.friends[i].c[0] + game.objects.friends[i].width / 2);
+					let y = Math.abs((this.c[1] + this.height / 2) - game.objects.friends[i].c[1] + game.objects.friends[i].height / 2);
+			
+					this.distance = Math.sqrt(x ** 2 + y ** 2);
+					if(this.distance < this.minDistance){
+						this.minDistance = this.distance;
+						this.target = game.objects.friends[i];
+					}
+				}
+			}
+
 			if(this.target && this.target.dead){
 				this.target = false;
 				for(let i = 0; i < game.objects.enemies.length; i ++){
