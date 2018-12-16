@@ -11,8 +11,8 @@
 		this.originX;
 		this.originY;
 		this.c = [];
-		// this.speed = 5;
-		this.speed = 10;
+		// this.speed = 10;
+		this.speed = 20;
 		this.width = 10;
 		this.height = 10;
 		this.damage = 15;
@@ -126,14 +126,14 @@
 				this.vy = Math.sin(angle) * this.speed;
 			}
 
-			this.drawX = (this.playerDrawX + game.player.width / 3) + (this.vx * 1);
-			this.drawY = (this.playerDrawY + game.player.height / 3) + (this.vy * 1);
+			this.drawX = (this.playerDrawX + game.player.width / 3) + (this.vx * .1);
+			this.drawY = (this.playerDrawY + game.player.height / 3) + (this.vy * .1);
 
-			this.c[0] = (this.playerMapX + game.player.width / 3) + (this.vx * 1);
-			this.c[1] = (this.playerMapY + game.player.height / 3) + (this.vy * 1);
+			this.c[0] = (this.playerMapX + game.player.width / 3) + (this.vx * .1);
+			this.c[1] = (this.playerMapY + game.player.height / 3) + (this.vy * .1);
 
-			this.originX = this.drawX += this.vx;
-			this.originY = this.drawY += this.vy;
+			// this.originX = this.drawX += this.vx;
+			// this.originY = this.drawY += this.vy;
 		},
 
 		delete: function(self){
@@ -149,14 +149,14 @@
 		this.width = 10;
 		this.height = 10;
 		this.damage = 50;
-		this.speed = 3;
+		this.speed = 15;
 		this.sprite = new Image();
 		this.used = false;
 		this.visible = true;
 		this.drawCounter = 0;
 		this.animationRate = 5;
 		this.sx = 0;
-		this.particleCounter = 4;
+		this.particleCounter = 0;
 
 		this.target = false;
 		this.vx;
@@ -173,8 +173,8 @@
 				this.update();
 			}
 			if(this.visible){
-				this.particleCounter ++;
-				if(this.particleCounter === 5){
+				// this.particleCounter ++;
+				if(this.particleCounter === 0){
 					game.objects.addParticle(new BulletParticle(this.drawX, this.drawY, this.c[0], this.c[1], 'black'));
 					game.objects.addParticle(new BulletParticle(this.drawX, this.drawY, this.c[0], this.c[1], 'black'));
 					this.particleCounter = 0;

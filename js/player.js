@@ -16,7 +16,7 @@
 		this.shootRate = 7;
 		this.shootTimeCounter = this.shootRate;
 		this.canShootMissle = false;
-		this.shootMissleRate = 100;
+		this.shootMissleRate = 50;
 		this.shootMissleTimeCounter = 0;
 		this.lastHit;
 		this.maxHealth = 100;

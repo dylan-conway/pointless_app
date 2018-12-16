@@ -2,7 +2,9 @@
 (function(){
 	function UI(){
 		// this.healthBar = new HealthBar();
-		this.gunBar = new GunBar();
+		// this.gunBar = new GunBar();
+		this.bulletBar = new GunBar('bullet', 'images/bulletIcon.png', Math.floor(innerWidth / 2) - 140, Math.floor(innerHeight - 48));
+		this.missleBar = new GunBar('missle', 'images/missleIcon.png', Math.floor(innerWidth / 2) + 18, Math.floor(innerHeight - 48));
 		// this.statsBar = new StatsBar();
 		this.scoreBar = new ScoreBar();
 		this.numberImage = new Image();
@@ -32,7 +34,9 @@
 
 			this.minimap.draw();
 
-			this.gunBar.draw();
+			// this.gunBar.draw();
+			this.bulletBar.draw();
+			this.missleBar.draw();
 
 			this.enemyBar.draw();
 		}
@@ -161,28 +165,35 @@
 		},
 	}
 
-	function GunBar(){
+	function GunBar(type, src, drawX, drawY){
 		this.icon = new Image();
-		this.drawX = Math.floor(innerWidth - 116);
-		this.drawY = Math.floor(innerHeight - 48);
+		this.type = type;
+		this.src = src;
+		this.drawX = drawX;
+		this.drawY = drawY;
 		this.width = 100;
 		this.height = 32;
 	}
 
 	GunBar.prototype = {
 		draw: function(){
-			// c.ctx.fillStyle = 'rgba(255, 255, 255, .5)';
-			// c.ctx.fillRect(this.drawX, this.drawY, this.width, this.height);
 			this.icon.onload = drawSprite(this.icon, this.drawX - 40, this.drawY);
-			this.icon.src = 'images/bulletIcon.png';
+			this.icon.src = this.src;
 			c.ctx.fillStyle = 'black';
 			c.ctx.fillRect(this.drawX - 2, this.drawY - 2, this.width + 4, 2);
 			c.ctx.fillRect(this.drawX - 2, this.drawY, 2, this.height);
 			c.ctx.fillRect(this.drawX - 2, this.drawY + this.height, this.width + 4, 2);
 			c.ctx.fillRect(this.drawX + this.width, this.drawY, 2, this.height);
 
-			let width = (game.player.shootTimeCounter / game.player.shootRate) * this.width;
-			c.ctx.fillStyle = 'rgba(255, 255, 255, .5)';
+			let width;
+			if(this.type === 'bullet'){
+				width = (game.player.shootTimeCounter / game.player.shootRate) * this.width;
+			}else if(this.type === 'missle'){
+				width = (game.player.shootMissleTimeCounter / game.player.shootMissleRate) * this.width;
+			}
+
+			// c.ctx.fillStyle = 'rgba(255, 255, 255, .5)';
+			c.ctx.fillStyle = 'black';
 			c.ctx.fillRect(this.drawX, this.drawY, width, this.height);
 		}
 	}
