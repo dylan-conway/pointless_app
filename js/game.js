@@ -58,43 +58,6 @@ window.onload = () => {
 				mouse.y = e.y * 1.25;
 			}
 			game.player.checkDirection(mouse.x, mouse.y);
-			// if(mouse.vx > 0){
-			// 	game.moveLeft(-mouse.vx / 9);
-			// 	game.player.drawX += -mouse.vx / 9;
-			// 	game.player.c[0] += -mouse.vx / 9;
-			// }else if(mouse.vx < 0){
-			// 	game.moveRight(mouse.vx / 9);
-			// 	game.player.drawX += -mouse.vx / 9;
-			// 	game.player.c[0] += -mouse.vx / 9;
-			// }
-			// if(mouse.vy > 0){
-			// 	game.moveUp(-mouse.vy / 7);
-			// 	game.player.drawY += -mouse.vy / 7;
-			// 	game.player.c[1] += -mouse.vy / 7;
-			// }else if(mouse.vy < 0){
-			// 	game.moveDown(mouse.vy / 7);
-			// 	game.player.drawY += -mouse.vy / 7;
-			// 	game.player.c[1] += -mouse.vy / 7;
-			// }
-
-			// if(mouse.vx > 0){
-			// 	game.moveLeft(-mouse.vx / 2);
-			// 	game.player.drawX += -mouse.vx / 2;
-			// 	game.player.c[0] += -mouse.vx / 2;
-			// }else if(mouse.vx < 0){
-			// 	game.moveRight(mouse.vx / 2);
-			// 	game.player.drawX += -mouse.vx / 2;
-			// 	game.player.c[0] += -mouse.vx / 2;
-			// }
-			// if(mouse.vy > 0){
-			// 	game.moveUp(-mouse.vy / 2);
-			// 	game.player.drawY += -mouse.vy / 2;
-			// 	game.player.c[1] += -mouse.vy / 2;
-			// }else if(mouse.vy < 0){
-			// 	game.moveDown(mouse.vy / 2);
-			// 	game.player.drawY += -mouse.vy / 2;
-			// 	game.player.c[1] += -mouse.vy / 2;
-			// }
 		}else if(game.state === 'end'){
 			if(mouse.x == undefined && mouse.y == undefined){
 				mouse.x = e.x * 1.25;
@@ -114,6 +77,10 @@ window.onload = () => {
 			if(mouse.x > 269 && mouse.x < 1446 && mouse.y > 214 && mouse.y < 448){
 				game.startGame();
 			}
+		}else if(game.state === 'end'){
+			if(mouse.x > 0 && mouse.x < 50 && mouse.y > 0 && mouse.y < 50){
+				game.startGame();
+			}
 		}
 	});
 
@@ -130,17 +97,17 @@ function gameLoop(){
 }
 
 function Game(){
-	this.mainmenu;
 	this.mainmenuImage = new Image();
 
 	this.map;
 	this.player;
 	this.objects;
 	this.ui;
-	this.killCount = 0;
+	this.killCount;
 
-	this.endmenu
 	this.endmenuImage = new Image();
+
+
 	this.state = 'mainmenu';
 }
 
@@ -167,9 +134,10 @@ Game.prototype = {
 			this.mainmenuImage.src = 'images/mainmenuimage2.png'
 		}else if(this.state === 'end'){
 			c.ctx.fillStyle = 'red';
-			c.ctx.fillRect(0, 0, innerWidth, innerHeight);
+			c.ctx.fillRect(0, 0, 50, 50);
 
-			if(Key.isDown(Key.ENTER)){this.startGame();};
+			this.endmenuImage.onload = drawSprite(this.endmenuImage, 0, 0);
+			this.endmenuImage.src = 'images/endmenuimage.png';
 		}
 	},
 
@@ -222,6 +190,10 @@ Game.prototype = {
 
 	endGame: function(){
 		this.state = 'end';
+		this.objects = undefined;
+		this.player = undefined;
+		this.ui = undefined;
+		this.map = undefined;
 	},
 
 	update: function(){
