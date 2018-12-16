@@ -78,7 +78,7 @@ window.onload = () => {
 				game.startGame();
 			}
 		}else if(game.state === 'end'){
-			if(mouse.x > 0 && mouse.x < 50 && mouse.y > 0 && mouse.y < 50){
+			if(mouse.x >= 0 && mouse.x < 50 && mouse.y >= 0 && mouse.y < 50){
 				game.startGame();
 			}
 		}
