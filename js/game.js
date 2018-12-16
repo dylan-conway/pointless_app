@@ -70,18 +70,25 @@ window.onload = () => {
 			}
 		}
 	});
-	window.addEventListener('click', function(){
-		if(game.state === 'main'){
-			game.player.shoot(mouse.x, mouse.y);
-		}else if(game.state === 'mainmenu'){
-			if(mouse.x > 269 && mouse.x < 1446 && mouse.y > 214 && mouse.y < 448){
-				game.startGame();
+	window.addEventListener('mouseup', function(event){
+		if(event.button === 0){
+			if(game.state === 'main'){
+				game.player.shoot('bullet', mouse.x, mouse.y);
+			}else if(game.state === 'mainmenu'){
+				if(mouse.x > 269 && mouse.x < 1446 && mouse.y > 214 && mouse.y < 448){
+					game.startGame();
+				}
+			}else if(game.state === 'end'){
+				if(mouse.x >= 0 && mouse.x < 50 && mouse.y >= 0 && mouse.y < 50){
+					game.startGame();
+				}
 			}
-		}else if(game.state === 'end'){
-			if(mouse.x >= 0 && mouse.x < 50 && mouse.y >= 0 && mouse.y < 50){
-				game.startGame();
+		}else if(event.button === 2){
+			if(game.state === 'main'){
+				game.player.shoot('missle', mouse.x, mouse.y);
 			}
 		}
+		
 	});
 
 
@@ -169,14 +176,14 @@ Game.prototype = {
 		this.player.c[1] = Math.floor((this.map.height / 2) - (this.player.height / 2));
 
 		this.objects = new Objects();
-		for(let i = 0; i < 400; i ++){
+		for(let i = 0; i < 50; i ++){
 			this.objects.addEnemy(new BadSlime(getRandomInt(1, game.map.width - 17), getRandomInt(1, 400), 1));
 			this.objects.addEnemy(new BadSlime(getRandomInt(1, game.map.width - 17), getRandomInt(game.map.height - 400, game.map.height - 17), 1));
 		}
-		for(let i = 0; i < 25; i ++){
+		for(let i = 0; i < 50; i ++){
 			this.objects.addEnemy(new BadSlime(getRandomInt(1, game.map.width - 33), getRandomInt(1, game.map.height - 33), 2));
 		}
-		for(let i = 0; i < 10; i ++){
+		for(let i = 0; i < 50; i ++){
 			this.objects.addEnemy(new BadSlime(getRandomInt(1, game.map.width - 33), getRandomInt(1, game.map.height - 33), 3));
 		}
 		for(let i = 0; i < 10; i ++){
@@ -290,6 +297,7 @@ let Key = {
 	DOWN: 83,
 	LEFT: 65,
 	ONE: 49,
+	SPACE: 32,
 	ESC: 27,
 
 	isDown: function(keyCode){

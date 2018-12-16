@@ -15,9 +15,6 @@
 		this.canShoot = true;
 		this.shootRate = 7;
 		this.shootTimeCounter = this.shootRate;
-		this.canShootSpecial = false;
-		this.shootSpecialRate = 100;
-		this.shootSpecialTimeCounter = 0
 		this.lastHit;
 		this.maxHealth = 100;
 		this.health = this.maxHealth;
@@ -61,20 +58,20 @@
 			}
 		},
 
-		shoot: function(mx, my){
-			if(this.canShoot){
-				game.objects.addBullet(new Bullet(this.drawX, this.drawY, mx, my, this.c[0], this.c[1]));
-				this.canShoot = false;
-				this.shootTimeCounter = 0;
+		shoot: function(type, mx, my){
+			if(type === 'bullet'){
+				if(this.canShoot){
+					game.objects.addBullet(new Bullet(this.drawX, this.drawY, mx, my, this.c[0], this.c[1]));
+					this.canShoot = false;
+					this.shootTimeCounter = 0;
+				}
+			}else if(type === 'missle'){
+				if(this.canShoot){
+					game.objects.addBullet(new Missle((this.drawX + this.width / 2) - 5, (this.drawY + this.height / 2) - 5,
+													  (this.c[0] + this.width / 2) - 5, (this.c[1] + this.height / 2) - 5));
+				}
 			}
-		},
-
-		shootSpecial: function(mx, my){
-			if(this.canShootSpecial){
-				game.objects.addBullet(new SpecialBullet(this.drawX, this.drawY, mx, my, this.c[0], this.c[1]));
-				this.canShootSpecial = false;
-				this.shootSpecialTimeCounter = 0;
-			}
+			
 		},
 
 		takeDamage: function(damage){
