@@ -5,8 +5,8 @@
   "description": "canvas based game",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
-    "package-win": "electron-packager . pointless --overwrite --asar --platform=win32 --arch=x64 --prune=true --out=releases --version-string.CompanyName=CE --version-string.ProductName=\"Pointless\""
+    "test": "electron .",
+    "package": "electron-packager . pointless --overwrite --asar --platform=win32 --arch=x64 --prune=true --out=releases --version-string.CompanyName=CE --version-string.ProductName=\"Pointless\""
   },
   "author": "Dylan Conway",
   "license": "ISC",
