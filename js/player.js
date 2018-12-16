@@ -15,6 +15,9 @@
 		this.canShoot = true;
 		this.shootRate = 7;
 		this.shootTimeCounter = this.shootRate;
+		this.canShootMissle = false;
+		this.shootMissleRate = 100;
+		this.shootMissleTimeCounter = 0;
 		this.lastHit;
 		this.maxHealth = 100;
 		this.health = this.maxHealth;
@@ -47,6 +50,12 @@
 			}else if(this.shootTimeCounter === this.shootRate){
 				this.canShoot = true;
 			}
+
+			if(this.shootMissleTimeCounter < this.shootMissleRate){
+				this.shootMissleTimeCounter ++;
+			}else if(this.shootMissleTimeCounter === this.shootMissleRate){
+				this.canShootMissle = true;
+			}
 		},
 
 		update: function(){	
@@ -66,9 +75,11 @@
 					this.shootTimeCounter = 0;
 				}
 			}else if(type === 'missle'){
-				if(this.canShoot){
+				if(this.canShootMissle){
 					game.objects.addBullet(new Missle((this.drawX + this.width / 2) - 5, (this.drawY + this.height / 2) - 5,
 													  (this.c[0] + this.width / 2) - 5, (this.c[1] + this.height / 2) - 5));
+					this.canShootMissle = false;
+					this.shootMissleTimeCounter = 0;
 				}
 			}
 			

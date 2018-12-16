@@ -39,7 +39,7 @@
 				this.particleCounter ++;
 				if(this.particleCounter === 5){
 					game.objects.addParticle(new BulletParticle(this.drawX, this.drawY, this.c[0], this.c[1], 'white'));
-					game.objects.addParticle(new BulletParticle(this.drawX, this.drawY, this.c[0], this.c[1], 'grey'));
+					game.objects.addParticle(new BulletParticle(this.drawX, this.drawY, this.c[0], this.c[1], 'white'));
 					this.particleCounter = 0;
 				}
 
@@ -148,7 +148,7 @@
 		this.c = [c0, c1];
 		this.width = 10;
 		this.height = 10;
-		this.damage = 5;
+		this.damage = 50;
 		this.speed = 3;
 		this.sprite = new Image();
 		this.used = false;
@@ -156,14 +156,13 @@
 		this.drawCounter = 0;
 		this.animationRate = 5;
 		this.sx = 0;
+		this.particleCounter = 4;
 
-
-
-		this.target;
+		this.target = false;
 		this.vx;
 		this.vy;
 		this.distance;
-		this.minDistance;
+		this.minDistance = 100000;
 	}
 
 	Missle.prototype = {
@@ -174,20 +173,12 @@
 				this.update();
 			}
 			if(this.visible){
-				// this.particleCounter ++;
-				// if(this.particleCounter === 5){
-				// 	game.objects.addParticle(new BulletParticle(this.drawX, this.drawY, this.c[0], this.c[1], 'black'));
-				// 	game.objects.addParticle(new BulletParticle(this.drawX, this.drawY, this.c[0], this.c[1], 'black'));
-				// 	this.particleCounter = 0;
-				// }
-
-				// c.ctx.fillStyle = 'rgba(106, 90, 205, .5)';
-				// c.ctx.beginPath();
-				// c.ctx.moveTo(-5 * (this.vx / this.vy) + this.originX, -5 * (this.vx / this.vy) + this.originY);
-				// c.ctx.lineTo(-(this.drawX - this.originX) * (this.vy / this.vx) + this.originX, -(this.drawY - this.originY) * (this.vy / this.vx) + this.originY);
-				// c.ctx.lineTo(5 * (this.vx / this.vy) + this.originX, 5 * (this.vx / this.vy) + this.originY);
-				// c.ctx.closePath();
-				// c.ctx.fill();
+				this.particleCounter ++;
+				if(this.particleCounter === 5){
+					game.objects.addParticle(new BulletParticle(this.drawX, this.drawY, this.c[0], this.c[1], 'black'));
+					game.objects.addParticle(new BulletParticle(this.drawX, this.drawY, this.c[0], this.c[1], 'black'));
+					this.particleCounter = 0;
+				}
 
 				this.sprite.onload = drawAnimationSprite(this.sprite, this.sx, 0, 10, 10, this.drawX, this.drawY, 10, 10);
 				this.sprite.src = 'images/missle.png';
@@ -205,17 +196,27 @@
 		},
 
 		update: function(){
-			if(game.objects.enemies.length === 0){
-				this.vx = 4;
-				this.vy = 3;
-			}else{
-				for(let i = 0; i < game.objects.enemies.length; i ++){
+
+			for(let i = 0; i < game.objects.enemies.length; i ++){
+				if(!game.objects.enemies[i].dead){
 					let x = Math.abs((this.c[0] + this.width / 2) - game.objects.enemies[i].c[0] + game.objects.enemies[i].width / 2);
 					let y = Math.abs((this.c[1] + this.height / 2) - game.objects.enemies[i].c[1] + game.objects.enemies[i].height / 2);
-					if(i === 0){
-						this.minDistance = Math.sqrt(x ** 2 + y ** 2);
+			
+					this.distance = Math.sqrt(x ** 2 + y ** 2);
+					if(this.distance < this.minDistance){
+						this.minDistance = this.distance;
 						this.target = game.objects.enemies[i];
-					}else{
+					}
+				}
+			}
+
+			if(this.target && this.target.dead){
+				this.target = false;
+				for(let i = 0; i < game.objects.enemies.length; i ++){
+					if(!game.objects.enemies[i].dead){
+						let x = Math.abs((this.c[0] + this.width / 2) - game.objects.enemies[i].c[0] + game.objects.enemies[i].width / 2);
+						let y = Math.abs((this.c[1] + this.height / 2) - game.objects.enemies[i].c[1] + game.objects.enemies[i].height / 2);
+				
 						this.distance = Math.sqrt(x ** 2 + y ** 2);
 						if(this.distance < this.minDistance){
 							this.minDistance = this.distance;
@@ -245,26 +246,30 @@
 		},
 
 		calcVelocity: function(){
-			let adjecent = Math.abs((this.target.c[0] + this.target.width / 2) - (this.c[0] + this.width / 2));
-			let opposite = Math.abs((this.target.c[1] + this.target.height / 2) - (this.c[1] + this.height / 2));
-			let angle = Math.atan(opposite / adjecent);
+			if(!this.target){
+				this.used = true;
+			}else{
+				let adjecent = Math.abs((this.target.c[0] + this.target.width / 2) - (this.c[0] + this.width / 2));
+				let opposite = Math.abs((this.target.c[1] + this.target.height / 2) - (this.c[1] + this.height / 2));
+				let angle = Math.atan(opposite / adjecent);
 
-			let cx = this.c[0] + this.width / 2;
-			let cy = this.c[1] + this.height / 2;
-			let ecx = this.target.c[0] + this.target.width / 2;
-			let ecy = this.target.c[1] + this.target.height / 2;
-			if(cx > ecx && cy > ecy){
-				this.vx = Math.cos(angle) * -this.speed;
-				this.vy = Math.sin(angle) * -this.speed;
-			}else if(cx < ecx && cy > ecy){
-				this.vx = Math.cos(angle) * this.speed;
-				this.vy = Math.sin(angle) * -this.speed;
-			}else if(cx < ecx && cy < ecy){
-				this.vx = Math.cos(angle) * this.speed;
-				this.vy = Math.sin(angle) * this.speed;
-			}else if(cx > ecx && cy < ecy){
-				this.vx = Math.cos(angle) * -this.speed;
-				this.vy = Math.sin(angle) * this.speed;
+				let cx = this.c[0] + this.width / 2;
+				let cy = this.c[1] + this.height / 2;
+				let ecx = this.target.c[0] + this.target.width / 2;
+				let ecy = this.target.c[1] + this.target.height / 2;
+				if(cx > ecx && cy > ecy){
+					this.vx = Math.cos(angle) * -this.speed;
+					this.vy = Math.sin(angle) * -this.speed;
+				}else if(cx < ecx && cy > ecy){
+					this.vx = Math.cos(angle) * this.speed;
+					this.vy = Math.sin(angle) * -this.speed;
+				}else if(cx < ecx && cy < ecy){
+					this.vx = Math.cos(angle) * this.speed;
+					this.vy = Math.sin(angle) * this.speed;
+				}else if(cx > ecx && cy < ecy){
+					this.vx = Math.cos(angle) * -this.speed;
+					this.vy = Math.sin(angle) * this.speed;
+				}	
 			}
 		}
 	}
