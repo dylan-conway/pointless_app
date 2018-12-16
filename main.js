@@ -2,9 +2,6 @@
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
-const remote = electron.remote;
-const Menu = electron.Menu;
-const menu = new Menu();
 // const Mousetrap = require('mousetrap');
 
 // const {app, BrowserWindow} = require('electron');
@@ -17,12 +14,14 @@ function createWindow(){
 
     // Mousetrap.bind('esc', function(){win.quit();}, 'keydown');
     // win.maximize();
-    win.setMenu(null);
-    win.loadFile('index.html');
+    win.loadFile('main.html');
 
     win.on('closed', () => {
         win = null;
     });
+
+    require('./electronMenu/mainmenu.js');
+    win.setMenuBarVisibility(false);
 }
 
 app.on('ready', createWindow);
