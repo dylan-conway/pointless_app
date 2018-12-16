@@ -15,6 +15,9 @@
 		this.canShoot = true;
 		this.shootRate = 7;
 		this.shootTimeCounter = this.shootRate;
+		this.canShootSpecial = false;
+		this.shootSpecialRate = 100;
+		this.shootSpecialTimeCounter = 0
 		this.lastHit;
 		this.maxHealth = 100;
 		this.health = this.maxHealth;
@@ -63,6 +66,14 @@
 				game.objects.addBullet(new Bullet(this.drawX, this.drawY, mx, my, this.c[0], this.c[1]));
 				this.canShoot = false;
 				this.shootTimeCounter = 0;
+			}
+		},
+
+		shootSpecial: function(mx, my){
+			if(this.canShootSpecial){
+				game.objects.addBullet(new SpecialBullet(this.drawX, this.drawY, mx, my, this.c[0], this.c[1]));
+				this.canShootSpecial = false;
+				this.shootSpecialTimeCounter = 0;
 			}
 		},
 

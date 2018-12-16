@@ -73,7 +73,7 @@
 			   this.c[0] < game.map.cc[0] + game.map.camWidth &&
 			   this.c[1] + this.height > game.map.cc[1] &&
 			   this.c[1] < game.map.cc[1] + game.map.camHeight){
-				this.visible = true;
+			    this.visible = true;
 			}else{
 				this.visible = false;
 			}
@@ -102,6 +102,136 @@
 			}
 
 			// console.log("X: " + this.c[0], "Y: " + this.c[1]);
+		},
+
+		calculateDirection: function(){
+			let originX = this.playerDrawX + (game.player.width / 2);
+			let originY = this.playerDrawY + (game.player.height / 2);
+			let adjecent = Math.abs(this.mx - originX);
+			let opposite = Math.abs(this.my - originY);
+			let angle = Math.atan(opposite / adjecent);
+			// console.log(adjecent, opposite, angle);
+
+			if(originX > this.mx && originY > this.my){
+				this.vx = Math.cos(angle) * -this.speed;
+				this.vy = Math.sin(angle) * -this.speed;
+			}else if(originX < this.mx && originY > this.my){
+				this.vx = Math.cos(angle) * this.speed;
+				this.vy = Math.sin(angle) * -this.speed;
+			}else if(originX < this.mx && originY < this.my){
+				this.vx = Math.cos(angle) * this.speed;
+				this.vy = Math.sin(angle) * this.speed;
+			}else if(originX > this.mx && originY < this.my){
+				this.vx = Math.cos(angle) * -this.speed;
+				this.vy = Math.sin(angle) * this.speed;
+			}
+
+			this.drawX = (this.playerDrawX + game.player.width / 3) + (this.vx * 1);
+			this.drawY = (this.playerDrawY + game.player.height / 3) + (this.vy * 1);
+
+			this.c[0] = (this.playerMapX + game.player.width / 3) + (this.vx * 1);
+			this.c[1] = (this.playerMapY + game.player.height / 3) + (this.vy * 1);
+
+			this.originX = this.drawX += this.vx;
+			this.originY = this.drawY += this.vy;
+		},
+
+		delete: function(self){
+			let index = game.objects.bullets.indexOf(self);
+			game.objects.bullets.splice(index, 1);
+		}
+	}
+
+	function SpecialBullet(drawX, drawY, mx, my, c0, c1){
+		this.playerDrawX = drawX;
+		this.playerDrawY = drawY;
+		this.playerMapX = c0;
+		this.playerMapY = c1;
+		this.drawX;
+		this.drawY;
+		this.mx = mx;
+		this.my = my;
+		this.originX;
+		this.originY;
+		this.c = [];
+		this.speed = 3;
+		this.width = 10;
+		this.height = 10;
+		this.damage = 30;
+		this.vx;
+		this.vy;
+		this.used = false;
+		this.visible = true;
+		this.sprite = new Image();
+		this.drawCounter = 0;
+		this.animationRate = 5;
+		this.sx = 0;
+		this.particleCounter = 3;
+		this.calculateDirection();
+	}
+
+	SpecialBullet.prototype = {
+		draw: function(){
+			if(this.used){
+				this.visible = false;
+			}else{
+				this.update();
+			}
+			if(this.visible){
+				this.particleCounter ++;
+				if(this.particleCounter === 5){
+
+
+					this.particleCounter = 0;
+				}
+
+				this.sprite.onload = drawAnimationSprite(this.sprite, this.sx, 0, 10, 10, this.drawX, this.drawY, 10, 10);
+				this.sprite.src = 'image/specialbullet.png';
+
+				this.drawCounter ++;
+				if(this.drawCounter === this.animationRate){
+					this.drawCounter = 0;
+					if(this.sx === 30){
+						this.sx = 0;
+					}else{
+						this.sx += this.width;
+					}
+				}
+			}
+		},
+
+		checkVisibility: function(){
+			if(this.c[0] + this.width > game.map.cc[0] &&
+			   this.c[0] < game.map.cc[0] + game.map.camWidth &&
+			   this.c[1] + this.height > game.map.cc[1] &&
+			   this.c[1] < game.map.cc[1] + game.map.camHeight){
+				this.visible = true;
+			}else{
+			    this.visible = false;
+			}
+		},
+
+		update: function(){
+			this.drawX += this.vx;
+			this.drawY += this.vy;
+			this.c[0] += this.vx;
+			this.c[1] += this.vy;
+
+			if(this.c[0] < 0 || this.c[0] + this.width > game.map.width){
+				// this.delete(this);
+				this.used = true;
+			}
+			if(this.c[1] < 0 || this.c[1] + this.height > game.map.height){
+				// this.delete(this);
+				this.used = true;
+			}
+
+			for(let wall of game.objects.walls){
+				if(this.c[0] + this.width > wall.c[0] && this.c[0] < wall.c[0] + wall.width &&
+				   this.c[1] + this.height > wall.c[1] && this.c[1] < wall.c[1] + wall.height){
+					this.used = true;
+				}
+			}
 		},
 
 		calculateDirection: function(){

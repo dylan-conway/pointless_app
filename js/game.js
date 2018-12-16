@@ -169,7 +169,7 @@ Game.prototype = {
 		this.player.c[1] = Math.floor((this.map.height / 2) - (this.player.height / 2));
 
 		this.objects = new Objects();
-		for(let i = 0; i < 200; i ++){
+		for(let i = 0; i < 400; i ++){
 			this.objects.addEnemy(new BadSlime(getRandomInt(1, game.map.width - 17), getRandomInt(1, 400), 1));
 			this.objects.addEnemy(new BadSlime(getRandomInt(1, game.map.width - 17), getRandomInt(game.map.height - 400, game.map.height - 17), 1));
 		}
@@ -182,7 +182,7 @@ Game.prototype = {
 		for(let i = 0; i < 10; i ++){
 			this.objects.addEnemy(new BadSlime(getRandomInt(1, game.map.width - 65), getRandomInt(1, game.map.height - 65), 4));
 		}
-		for(let i = 0; i < 3; i ++){
+		for(let i = 0; i < 2; i ++){
 			this.objects.addEnemy(new BadSlime(getRandomInt(1, game.map.width - 129), getRandomInt(1, game.map.height - 129), 5));
 		}
 		for(let i = 0; i < 10; i ++){
