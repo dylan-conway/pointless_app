@@ -10,7 +10,7 @@
   },
   "author": "Dylan Conway",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "asar": "^0.14.6",
     "electron": "^3.0.11",
     "electron-packager": "^13.0.0"
