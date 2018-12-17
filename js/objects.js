@@ -32,9 +32,7 @@
 			for(let wall of this.walls){
 				wall.draw();
 			}
-			for(let friend of this.friends){
-				friend.draw();
-			}
+			this.friends.forEach(friend => {friend.draw()});
 			for(let enemy of this.enemies){
 				enemy.draw();
 			}
