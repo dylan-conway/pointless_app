@@ -12,7 +12,7 @@
 		this.originY;
 		this.c = [];
 		// this.speed = 10;
-		this.speed = 20;
+		this.speed = 10;
 		this.width = 10;
 		this.height = 10;
 		this.damage = 15;
@@ -149,7 +149,8 @@
 		this.width = 10;
 		this.height = 10;
 		this.damage = 50;
-		this.speed = 15;
+		// this.speed = 15;
+		this.speed = 8;
 		this.sprite = new Image();
 		this.used = false;
 		this.visible = true;
