@@ -15,7 +15,7 @@
 	GameMap.prototype = {
 		draw: function(){
 			this.sprite.onload = drawSprite(this.sprite, this.drawX - this.camX, this.drawY - this.camY);
-			this.sprite.src = 'images/rewoven4.png';
+			this.sprite.src = 'images/allmightiscute.jpg';
 		},
 
 		moveUp: function(speed){
