@@ -17,8 +17,8 @@ window.onload = () => {
 	window.innerWidth = w;
 	window.innerHeight = h;
 	// console.log(w, h, innerWidth, innerHeight, dpr);
-	c.canvas.width = w * dpr / 2;
-	c.canvas.height = h * dpr / 2;
+	c.canvas.width = w * dpr;
+	c.canvas.height = h * dpr;
 	c.canvas.style.width = w + 'px';
 	c.canvas.style.height = h + 'px';
 	
